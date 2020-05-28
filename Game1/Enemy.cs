@@ -57,27 +57,39 @@ namespace Game1
                 x < Game1.global.Player.x + 30 && 
                 y > Game1.global.Player.y - 30 && 
                 y < Game1.global.Player.y + 30)
-            {
+           {
 
                 Game1.global.Player.ballAlive = 0;
             }
             x = x + dx * speed;
             y = y + dy * speed;
 
-            for(int i = 0; i<Game1.global.ListOfBullets.Count;i++)
+            
+
+            for (int i = 0; i < Game1.global.ListOfBullets.Count; i++)
             {
-                if( x < Game1.global.ListOfBullets[i].x + 20 && 
+                if (x < Game1.global.ListOfBullets[i].x + 20 &&
                     x > Game1.global.ListOfBullets[i].x - 20 &&
                     y < Game1.global.ListOfBullets[i].y + 20 &&
-                    y > Game1.global.ListOfBullets[i].y - 20)
+                   y > Game1.global.ListOfBullets[i].y - 20)
                 {
                     Game1.global.ListOfBullets[i].bulletAlive = 0;
                     enemyHP--;
-                    
+
                 }
                 if (enemyHP <= 0)
-                    enemyAlive = 0;
+                {
+                   enemyAlive = 0;
+                        
+                        
+                
+                /*
+                int chance = Game1.global.rand.Next(1, 10);
+                if (chance == 2)
+                      Game1.global.bombCount++; */
+                }
             }
+        
             
 
         }

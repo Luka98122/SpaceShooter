@@ -22,6 +22,7 @@ namespace Game1
         public int SpriteHeight = 50;
         public int ballAlive = 1;
         public int bombCount = 3;
+        public int portalcooldown = 30;
 
 
         public Player()
@@ -100,7 +101,7 @@ namespace Game1
                     MyBullet.x = Game1.global.Player.x;
                     MyBullet.y = Game1.global.Player.y;
                     Game1.global.ListOfBullets.Add(MyBullet);
-                    Game1.global.cooldown = 1;
+                    Game1.global.cooldown = 5;
                 }
                 Game1.global.cooldown--;
             }
@@ -116,6 +117,7 @@ namespace Game1
             SummonEnemies();
             movement();
             Shooting();
+            portalcooldown--;
             //x = x + dx;
             //y = y + dy;
 
@@ -139,25 +141,26 @@ namespace Game1
                 y = WindowHeight - SpriteHeight;
             }
 
-            if (x <= 1)
+            if (x <= 1 && portalcooldown <= 0)
             {
                 x = WindowWidth - SpriteHeight - 2;
+                portalcooldown = 400;
 
             }
-            if (x >= WindowWidth - SpriteHeight - 1)
+            if (x >= WindowWidth - SpriteHeight - 1 && portalcooldown <= 0)
             {
                 x = 2;
-
+                portalcooldown = 400;
             }
-            if (y <= 1)
+            if (y <= 1 && portalcooldown <= 0)
             {
                 y = WindowHeight - SpriteHeight - 2;
-
+                portalcooldown = 400;
             }
-            if (y >= WindowHeight - SpriteHeight - 1)
+            if (y >= WindowHeight - SpriteHeight - 1 && portalcooldown <= 0)
             {
                 y = 2;
-
+                portalcooldown = 400;
             }
 
         }
