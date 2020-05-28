@@ -74,94 +74,24 @@ namespace Game1
             {
                 Exit();
             }
-            if(GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && summonCooldown <= 0)
-            {
-                Enemy MyEnemy = new Enemy();
-                ListOfEnemies.Add(MyEnemy);
-                summonCooldown = 20;
-            }
-            if(GamePad.GetState(PlayerIndex.One).Triggers.Right >= 0.7 && bombCount>0 && bombcooldown <0 )
-            {
-                bombCount--;
-                for(int i = 0;i<ListOfEnemies.Count;i++)
-                {
-                    ListOfEnemies[i].enemyAlive = 0;
-                }
-                Thread.Sleep(100);
-                Console.Beep(200, 600);
-                bombcooldown = 10;
-            }
-            bombcooldown--;
 
-            summonCooldown--;
+
+            
                 
-            int speed = 15;
+            
               
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             // TODO: Add your update logic here
-            float UD = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y;
-            float LR = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X;
-            float shooterX = GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.X;
-            float shooterY = GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.Y;
+            
             
                
-            if(GamePad.GetState(PlayerIndex.One).Buttons.X == ButtonState.Pressed)
-            {
-               if(Player.dx < 0)
-                  Player.dx = rand.Next(-10, -1);
-               else {
-                     Player.dx = rand.Next(1, 10);
-                    }
-            }
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Y == ButtonState.Pressed)
-                {
-                if (Player.dy < 0)
-                    Player.dy = rand.Next(-10, -1);
-                else
-                {
-                    Player.dy = rand.Next(1, 10);
-                }
-            } 
-            if(LR >= 0.3)
-            {
-                 
-                Player.dx = speed * LR;
-                Player.x = Player.x + Player.dx;
-            }
-            if (LR <= -0.3)
-            {
-                Player.dx = -speed * LR;
-                Player.x = Player.x - Player.dx;
-            }
-            if (UD >= 0.3)
-            {
-                Player.dy = speed * UD;
-                Player.y = Player.y - Player.dy;
-            }
-            if (UD <= -0.3)
-            {
-                Player.dy = -speed * UD;
-                Player.y = Player.y + Player.dy;
-            }
+            
 
             // Handle bullet creation
-            if ( shooterX >= 0.3   || shooterX <= -0.3 || shooterY >= 0.3 || shooterY <= -0.3)  
-            {
-                if (Game1.global.cooldown == 0)
-                {
-                    Bullet MyBullet = new Bullet();
-                    MyBullet.dx = shooterX;
-                    MyBullet.dy = -shooterY;
-                    MyBullet.x = Player.x;
-                    MyBullet.y = Player.y;
-                    ListOfBullets.Add(MyBullet);
-                    Game1.global.cooldown = 1;
-                }
-                Game1.global.cooldown--;
-            }
+            
 
             // Do the update
             Player.update();
