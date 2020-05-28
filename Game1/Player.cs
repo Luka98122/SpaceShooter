@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Game1
 {
-    public class Ball
+    public class Player
     {
-     //   static Random rand = new Random();
+        //   static Random rand = new Random();
         public int WindowWidth = 800;
         public int WindowHeight = 480;
         public float x;
@@ -21,51 +21,51 @@ namespace Game1
         public int SpriteHeight = 50;
         public int ballAlive = 1;
         public int bombCount = 3;
-        
 
-        public Ball ()
+
+        public Player()
         {
-            x = Game1.global.rand.Next(1, WindowWidth/2);
-            y = Game1.global.rand.Next(1, WindowHeight/2);
+            x = Game1.global.rand.Next(1, WindowWidth / 2);
+            y = Game1.global.rand.Next(1, WindowHeight / 2);
             dx = 5;
             dy = 5;
         }
 
-        public void update ()
+        public void update()
         {
-            if(ballAlive == 0)
+            if (ballAlive == 0)
             {
                 return;
             }
             //x = x + dx;
             //y = y + dy;
 
-            if (x <= dx )
+            if (x <= dx)
             {
-                
+
                 x = 1;
             }
-            if(x >= WindowWidth - SpriteWidth)
+            if (x >= WindowWidth - SpriteWidth)
             {
                 x = WindowWidth - SpriteWidth;
             }
 
-            if (y <= dy )
+            if (y <= dy)
             {
 
                 y = 1;
             }
-            if(y >= WindowHeight - SpriteHeight)
+            if (y >= WindowHeight - SpriteHeight)
             {
                 y = WindowHeight - SpriteHeight;
             }
 
-            if(x <= 1 )
+            if (x <= 1)
             {
-                x = WindowWidth-SpriteHeight-2;
-                
+                x = WindowWidth - SpriteHeight - 2;
+
             }
-            if (x >= WindowWidth-SpriteHeight-1)
+            if (x >= WindowWidth - SpriteHeight - 1)
             {
                 x = 2;
 
@@ -77,7 +77,7 @@ namespace Game1
             }
             if (y >= WindowHeight - SpriteHeight - 1)
             {
-                y =2;
+                y = 2;
 
             }
 

@@ -9,7 +9,6 @@ namespace Game1
 {
     public class Enemy
     {
-
         float x;
         float y;
         float dx;

@@ -10,7 +10,7 @@ namespace Game1
 {
     public class Game1 : Game
     {
-        public Ball Player;
+        public Player Player;
         public Random rand = new Random();
         public List<Enemy> ListOfEnemies = new List<Enemy>();
         public static Game1 global = null;
@@ -38,7 +38,7 @@ namespace Game1
         
         protected override void Initialize()
         {
-            Player = new Ball();
+            Player = new Player();
 
 
             // Enemy init
