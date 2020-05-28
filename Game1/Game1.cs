@@ -75,25 +75,9 @@ namespace Game1
                 Exit();
             }
 
-
-            
-                
-            
-              
-
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-            
-            
-               
-            
-
-            // Handle bullet creation
-            
-
-            // Do the update
             Player.update();
             
             for(int i = 0;i<ListOfBullets.Count;i++)
@@ -109,14 +93,15 @@ namespace Game1
             {
                 ListOfEnemies[i].update();
             }
-
+            /*
             if (--debugCooldown <= 0) {
                 Debug.WriteLine("Number of bullets " + ListOfBullets.Count);
                 debugCooldown = 20;
             }
-            base.Update(gameTime);
+            base.Update(gameTime); */
         }
         static int debugCooldown = 20;
+        
 
 
         protected override void Draw(GameTime gameTime)

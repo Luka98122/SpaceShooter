@@ -59,7 +59,7 @@ namespace Game1
 
         public void movement ()
         {
-            int speed = 15;
+            int speed = 5;
             float UD = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y;
             float LR = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X;
             
@@ -112,10 +112,10 @@ namespace Game1
             {
                 return;
             }
-            Game1.global.Player.bombing();
-            Game1.global.Player.SummonEnemies();
-            Game1.global.Player.movement();
-            Game1.global.Player.Shooting();
+            bombing();
+            SummonEnemies();
+            movement();
+            Shooting();
             //x = x + dx;
             //y = y + dy;
 
