@@ -65,7 +65,7 @@ namespace Game1
                     y < Game1.global.ListOfBullets[i].y + 20 &&
                    y > Game1.global.ListOfBullets[i].y - 20)
                 {
-                    Game1.global.ListOfBullets[i].bulletAlive = 0;
+                    Game1.global.ListOfBullets[i].state = State.Dead;
                     enemyHP--;
                 }
                 if (enemyHP <= 0)

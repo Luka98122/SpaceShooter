@@ -7,30 +7,28 @@ using System.Threading.Tasks;
 
 namespace Game1
 {
-    public class Bullet
+    public class Bullet : GameEntity
     {
-        public int bulletWidth = 15;
-        public int bulletHeight = 15;
         public float dx;
         public float dy;
-        public float x;
-        public float y;
-        public int bulletAlive = 1;
         public float speed = 5;
         public Random rand = new Random();
 
 
-        public Bullet() 
+
+        public override void initialize()
         {
             x = 0;
             y = 0;
             dx = 0;
             dy = 0;
-            
+            width = 15;
+            height = 15;
+            state = State.Alive;
         }
-        public void update ()
+        override public void update ()
         {
-            if (bulletAlive == 0)
+            if (state == State.Dead)
             {
                 return;
             }
@@ -40,20 +38,20 @@ namespace Game1
 
             if (x<0 || x > Game1.global.WindowWidth || y < 0 || y > Game1.global.WindowHeight)
             {
-                bulletAlive = 0;
+                state = State.Dead;
             }
         }
-        public void draw ()
+        override public void draw ()
         {
-            if( bulletAlive == 0)
+            if( state == State.Dead)
             {
                 return;
             }
             Game1.global.spriteBatch.Draw(Game1.global.texBall,
                 new Rectangle((int)x,
                 (int)y,
-                bulletWidth,
-                bulletHeight),
+                (int)width,
+                (int)height),
                 Color.White);
 
 
