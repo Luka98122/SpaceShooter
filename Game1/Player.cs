@@ -50,7 +50,7 @@ namespace Game1
                 bombCount--;
                 for (int i = 0; i < Game1.global.ListOfEnemies.Count; i++)
                 {
-                    Game1.global.ListOfEnemies[i].enemyAlive = 0;
+                    Game1.global.ListOfEnemies[i].state = GameEntity.State.Dead;
                 }
                 Console.Beep(200, 600);
                 Game1.global.bombcooldown = 10;

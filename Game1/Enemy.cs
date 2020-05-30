@@ -7,34 +7,30 @@ using System.Threading.Tasks;
 
 namespace Game1
 {
-    public class Enemy
+    public class Enemy : GameEntity
     {
-        float x;
-        float y;
         float dx;
         float dy;
-        public int enemyAlive = 1;
-        int enemyWidth = 50;
-        int enemyHeight = 50;
-        int enemyHP = 10;
-        float speed = 2.0f;
+        int enemyHP = 1;
+        float speed = 2.9f;
 
-        public Enemy ()
+        public override void initialize()
         {
-            x = Game1.global.rand.Next(Game1.global.WindowWidth/2, Game1.global.WindowWidth);
-            y = Game1.global.rand.Next(Game1.global.WindowHeight/2, Game1.global.WindowHeight);
-            dx = Game1.global.rand.Next(-1,1);
+            x = Game1.global.rand.Next(Game1.global.WindowWidth / 2, Game1.global.WindowWidth);
+            y = Game1.global.rand.Next(Game1.global.WindowHeight / 2, Game1.global.WindowHeight);
+            dx = Game1.global.rand.Next(-1, 1);
             dy = Game1.global.rand.Next(-1, 1);
-            
+            width = 50;
+            height = 50;
         }
-        public void update ()
+
+        override public void update ()
         {
-            if(enemyAlive == 0)
+            if(state == State.Dead)
             {
                 return;
             }
-            
-            
+                        
             if (y < Game1.global.Player.y )
             {
                 dy = 1;
@@ -43,7 +39,6 @@ namespace Game1
             {
                 dy = -1;
             }
-
             if (x < Game1.global.Player.x)
             {
                 dx = 1;
@@ -57,14 +52,11 @@ namespace Game1
                 x < Game1.global.Player.x + 30 && 
                 y > Game1.global.Player.y - 30 && 
                 y < Game1.global.Player.y + 30)
-           {
-
+            {
                 Game1.global.Player.ballAlive = 0;
             }
             x = x + dx * speed;
             y = y + dy * speed;
-
-            
 
             for (int i = 0; i < Game1.global.ListOfBullets.Count; i++)
             {
@@ -75,38 +67,25 @@ namespace Game1
                 {
                     Game1.global.ListOfBullets[i].bulletAlive = 0;
                     enemyHP--;
-
                 }
                 if (enemyHP <= 0)
                 {
-                   enemyAlive = 0;
-                        
-                        
-                
-                /*
-                int chance = Game1.global.rand.Next(1, 10);
-                if (chance == 2)
-                      Game1.global.bombCount++; */
+                   state = State.Dead;
                 }
             }
-        
-            
-
         }
-        public void draw()
+        override public void draw()
         {
-            if (enemyAlive == 0) { 
-                
+            if (state == State.Dead) { 
                 return;
             }   
 
             Game1.global.spriteBatch.Draw(Game1.global.texMario,
                 new Rectangle((int)x,
                 (int)y,
-                enemyWidth,
-                enemyHeight),
+                (int)width,
+                (int)height),
                 Color.White);
         }
-        
     }
 }
