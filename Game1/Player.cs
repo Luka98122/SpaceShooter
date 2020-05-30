@@ -7,8 +7,8 @@ namespace Game1
 {
     public class Player : GameEntity
     {
-        public int WindowWidth = 800;
-        public int WindowHeight = 480;
+        public int windowWidth = 800; //TODO: remove
+        public int windowHeight = 480;//TODO: remove
         public float dx;
         public float dy;
         public int bombCount = 3;
@@ -17,8 +17,8 @@ namespace Game1
 
         public override void initialize()
         {
-            x = Game1.global.rand.Next(1, WindowWidth / 2);
-            y = Game1.global.rand.Next(1, WindowHeight / 2);
+            x = Game1.global.rand.Next(1, windowWidth / 2);
+            y = Game1.global.rand.Next(1, windowHeight / 2);
             dx = 5;
             dy = 5;
             height = 50;
@@ -31,7 +31,7 @@ namespace Game1
         }
 
 
-        public void SummonEnemies()
+        public void updateSummonEnemies()
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && Game1.global.summonCooldown <= 0)
             {
@@ -41,7 +41,9 @@ namespace Game1
             }
             Game1.global.summonCooldown--;
         }
-        public void bombing() {
+
+        // BUG: Portals broken
+        public void updateBombing() {
             if (GamePad.GetState(PlayerIndex.One).Triggers.Right >= 0.7 && bombCount > 0 && Game1.global.bombcooldown < 0)
             {
                 bombCount--;
@@ -55,7 +57,7 @@ namespace Game1
                 Game1.global.bombcooldown--;
         }
 
-        public void movement ()
+        public void updateMovement ()
         {
             int speed = 5;
             float UD = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y;
@@ -63,27 +65,26 @@ namespace Game1
             
             if (LR >= 0.3)
             {
-
-                Game1.global.player.dx = speed * LR;
-                Game1.global.player.x = Game1.global.player.x + Game1.global.player.dx;
+                dx = speed * LR;
+                x = x + dx;
             }
             if (LR <= -0.3)
             {
-                Game1.global.player.dx = -speed * LR;
-                Game1.global.player.x = Game1.global.player.x - Game1.global.player.dx;
+                dx = -speed * LR;
+                x = x - dx;
             }
             if (UD >= 0.3)
             {
-                Game1.global.player.dy = speed * UD;
-                Game1.global.player.y = Game1.global.player.y - Game1.global.player.dy;
+                dy = speed * UD;
+                y = y - dy;
             }
             if (UD <= -0.3)
             {
-                Game1.global.player.dy = -speed * UD;
-                Game1.global.player.y = Game1.global.player.y + Game1.global.player.dy;
+                dy = -speed * UD;
+                y = y + dy;
             }
         }
-        public void Shooting ()
+        public void updateShooting ()
         {
             float shooterX = GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.X;
             float shooterY = GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.Y;
@@ -95,8 +96,8 @@ namespace Game1
                     Bullet MyBullet = new Bullet();
                     MyBullet.dx = shooterX;
                     MyBullet.dy = -shooterY;
-                    MyBullet.x = Game1.global.player.x;
-                    MyBullet.y = Game1.global.player.y;
+                    MyBullet.x = x;
+                    MyBullet.y = y;
                     Game1.global.ListOfBullets.Add(MyBullet);
                     Game1.global.cooldown = 5;
                 }
@@ -104,46 +105,13 @@ namespace Game1
             }
         }
         
-        override public void update()
+        public void updatePortal ()
         {
-
-            if (state == State.Dead)
-            {
-                return;
-            }
-            bombing();
-            SummonEnemies();
-            movement();
-            Shooting();
-            portalcooldown--;
-            //x = x + dx;
-            //y = y + dy;
-
-            if (x <= dx)
-            {
-
-                x = 1;
-            }
-            if (x >= width - width)
-            {
-                x = width - width;
-            }
-
-            if (y <= dy)
-            {
-
-                y = 1;
-            }
-            if (y >= height - height)
-            {
-                y = height - height;
-            }
-
+            //TODO: use game windowheight
             if (x <= 1 && portalcooldown <= 0)
             {
-                x = width -height - 2;
+                x = width - height - 2;
                 portalcooldown = 400;
-
             }
             if (x >= width - height - 1 && portalcooldown <= 0)
             {
@@ -160,12 +128,48 @@ namespace Game1
                 y = 2;
                 portalcooldown = 400;
             }
+        }
 
+        public void updateBorder ()
+        {
+            if (x <= dx)
+            {
+                x = 1;
+            }
+            if (x >= windowWidth - width)
+            {
+                x = windowWidth - width;
+            }
+            if (y <= dy)
+            {
+                y = 1;
+            }
+            if (y >= windowHeight - height)
+            {
+                y = windowHeight - height;
+            }
+        }
+
+        override public void update()
+        {
+            if (state == State.Dead)
+            {
+                return;
+            }
+            updateBombing();
+            updateSummonEnemies();
+            updateMovement();
+            updateShooting();
+            updatePortal();
+            updateBorder();
         }
         public override void draw()
         {
-            if (state == State.Alive)
-                Game1.global.spriteBatch.Draw(texBall, new Rectangle((int)x, (int)y, (int)width, (int)height), Color.White);
+            if (state == State.Dead)
+            {
+                return;
+            }
+            Game1.global.spriteBatch.Draw(texBall, new Rectangle((int)x, (int)y, (int)width, (int)height), Color.White);
         }
     }
 }
