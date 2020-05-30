@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,10 +14,8 @@ namespace Game1
         public float dx;
         public float dy;
         public float speed = 5;
-        public Random rand = new Random();
-
-
-
+        static public Texture2D texBall;
+        
         public override void initialize()
         {
             x = 0;
@@ -25,6 +25,12 @@ namespace Game1
             width = 15;
             height = 15;
             state = State.Alive;
+            
+        }
+
+        public static void loadResources()
+        {
+            texBall = Game1.global.Content.Load<Texture2D>("ball");
         }
         override public void update ()
         {
@@ -47,27 +53,12 @@ namespace Game1
             {
                 return;
             }
-            Game1.global.spriteBatch.Draw(Game1.global.texBall,
+            Game1.global.spriteBatch.Draw(texBall,
                 new Rectangle((int)x,
                 (int)y,
                 (int)width,
                 (int)height),
                 Color.White);
-
-
-                
-/*
-            Game1.global.spriteBatch.Draw(texBall, 
-                new Rectangle((int)ListOfBalls[i].x, 
-                (int)ListOfBalls[i].y, 
-                SpriteWidth, 
-                SpriteHeight), 
-                Color.White);
-
-*/
         }
     }
-
-    
-
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace Game1
         float dy;
         int enemyHP = 1;
         float speed = 2.9f;
+        static public Texture2D texMario;
 
         public override void initialize()
         {
@@ -24,6 +26,12 @@ namespace Game1
             height = 50;
         }
 
+        public static void loadResources()
+        {
+            texMario =Game1.global.Content.Load<Texture2D>("happy mario");
+
+        }
+
         override public void update ()
         {
             if(state == State.Dead)
@@ -31,29 +39,29 @@ namespace Game1
                 return;
             }
                         
-            if (y < Game1.global.Player.y )
+            if (y < Game1.global.player.y )
             {
                 dy = 1;
             }
-            if (y > Game1.global.Player.y)
+            if (y > Game1.global.player.y)
             {
                 dy = -1;
             }
-            if (x < Game1.global.Player.x)
+            if (x < Game1.global.player.x)
             {
                 dx = 1;
             }
-            if (x > Game1.global.Player.x)
+            if (x > Game1.global.player.x)
             {
                 dx = -1;
             }
 
-            if (x > Game1.global.Player.x - 30 && 
-                x < Game1.global.Player.x + 30 && 
-                y > Game1.global.Player.y - 30 && 
-                y < Game1.global.Player.y + 30)
+            if (x > Game1.global.player.x - 30 && 
+                x < Game1.global.player.x + 30 && 
+                y > Game1.global.player.y - 30 && 
+                y < Game1.global.player.y + 30)
             {
-                Game1.global.Player.ballAlive = 0;
+                Game1.global.player.state = State.Dead;
             }
             x = x + dx * speed;
             y = y + dy * speed;
@@ -80,7 +88,7 @@ namespace Game1
                 return;
             }   
 
-            Game1.global.spriteBatch.Draw(Game1.global.texMario,
+            Game1.global.spriteBatch.Draw(texMario,
                 new Rectangle((int)x,
                 (int)y,
                 (int)width,

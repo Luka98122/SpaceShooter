@@ -1,39 +1,36 @@
 ﻿using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Game1
 {
-    public class Player
+    public class Player : GameEntity
     {
-        //   static Random rand = new Random();
         public int WindowWidth = 800;
         public int WindowHeight = 480;
-        public float x;
-        public float y;
         public float dx;
         public float dy;
-        public int SpriteWidth = 50;
-        public int SpriteHeight = 50;
-        public int ballAlive = 1;
         public int bombCount = 3;
         public int portalcooldown = 30;
+        static public Texture2D texBall;
 
-
-        public Player()
+        public override void initialize()
         {
             x = Game1.global.rand.Next(1, WindowWidth / 2);
             y = Game1.global.rand.Next(1, WindowHeight / 2);
             dx = 5;
             dy = 5;
+            height = 50;
+            width = 50;
+        }
+        
+        public void loadResources()
+        {
+            texBall = Game1.global.Content.Load<Texture2D>("ball");
         }
 
-        
+
         public void SummonEnemies()
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && Game1.global.summonCooldown <= 0)
@@ -67,23 +64,23 @@ namespace Game1
             if (LR >= 0.3)
             {
 
-                Game1.global.Player.dx = speed * LR;
-                Game1.global.Player.x = Game1.global.Player.x + Game1.global.Player.dx;
+                Game1.global.player.dx = speed * LR;
+                Game1.global.player.x = Game1.global.player.x + Game1.global.player.dx;
             }
             if (LR <= -0.3)
             {
-                Game1.global.Player.dx = -speed * LR;
-                Game1.global.Player.x = Game1.global.Player.x - Game1.global.Player.dx;
+                Game1.global.player.dx = -speed * LR;
+                Game1.global.player.x = Game1.global.player.x - Game1.global.player.dx;
             }
             if (UD >= 0.3)
             {
-                Game1.global.Player.dy = speed * UD;
-                Game1.global.Player.y = Game1.global.Player.y - Game1.global.Player.dy;
+                Game1.global.player.dy = speed * UD;
+                Game1.global.player.y = Game1.global.player.y - Game1.global.player.dy;
             }
             if (UD <= -0.3)
             {
-                Game1.global.Player.dy = -speed * UD;
-                Game1.global.Player.y = Game1.global.Player.y + Game1.global.Player.dy;
+                Game1.global.player.dy = -speed * UD;
+                Game1.global.player.y = Game1.global.player.y + Game1.global.player.dy;
             }
         }
         public void Shooting ()
@@ -98,18 +95,19 @@ namespace Game1
                     Bullet MyBullet = new Bullet();
                     MyBullet.dx = shooterX;
                     MyBullet.dy = -shooterY;
-                    MyBullet.x = Game1.global.Player.x;
-                    MyBullet.y = Game1.global.Player.y;
+                    MyBullet.x = Game1.global.player.x;
+                    MyBullet.y = Game1.global.player.y;
                     Game1.global.ListOfBullets.Add(MyBullet);
                     Game1.global.cooldown = 5;
                 }
                 Game1.global.cooldown--;
             }
         }
-        public void update()
+        
+        override public void update()
         {
 
-            if (ballAlive == 0)
+            if (state == State.Dead)
             {
                 return;
             }
@@ -126,9 +124,9 @@ namespace Game1
 
                 x = 1;
             }
-            if (x >= WindowWidth - SpriteWidth)
+            if (x >= width - width)
             {
-                x = WindowWidth - SpriteWidth;
+                x = width - width;
             }
 
             if (y <= dy)
@@ -136,35 +134,38 @@ namespace Game1
 
                 y = 1;
             }
-            if (y >= WindowHeight - SpriteHeight)
+            if (y >= height - height)
             {
-                y = WindowHeight - SpriteHeight;
+                y = height - height;
             }
 
             if (x <= 1 && portalcooldown <= 0)
             {
-                x = WindowWidth - SpriteHeight - 2;
+                x = width -height - 2;
                 portalcooldown = 400;
 
             }
-            if (x >= WindowWidth - SpriteHeight - 1 && portalcooldown <= 0)
+            if (x >= width - height - 1 && portalcooldown <= 0)
             {
                 x = 2;
                 portalcooldown = 400;
             }
             if (y <= 1 && portalcooldown <= 0)
             {
-                y = WindowHeight - SpriteHeight - 2;
+                y = height - height - 2;
                 portalcooldown = 400;
             }
-            if (y >= WindowHeight - SpriteHeight - 1 && portalcooldown <= 0)
+            if (y >= height - height - 1 && portalcooldown <= 0)
             {
                 y = 2;
                 portalcooldown = 400;
             }
 
         }
-
-
+        public override void draw()
+        {
+            if (state == State.Alive)
+                Game1.global.spriteBatch.Draw(texBall, new Rectangle((int)x, (int)y, (int)width, (int)height), Color.White);
+        }
     }
 }
