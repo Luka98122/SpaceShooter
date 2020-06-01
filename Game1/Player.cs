@@ -108,22 +108,22 @@ namespace Game1
         public void updatePortal ()
         {
             
-            if (x <= 1 && portalcooldown <= 0)
+            if (x - width/2 <= 2 && portalcooldown <= 0)
             {
                 x = Game1.global.windowWidth - width + 2;
                 portalcooldown = 100;
             }
-            if (x >= Game1.global.windowWidth - width + 1 && portalcooldown <= 0)
+            if (x >= Game1.global.windowWidth - width/2 + 2 && portalcooldown <= 0)
             {
                 x = 2;
                 portalcooldown = 100;
             }
-            if (y <= 1 && portalcooldown <= 0)
+            if (y - height/2 <= 2 && portalcooldown <= 0)
             {
                 y = Game1.global.windowHeight - height - 2;
                 portalcooldown = 100;
             }
-            if (y >= Game1.global.windowHeight - height + 2 && portalcooldown <= 0)
+            if (y >= Game1.global.windowHeight - height/2 + 2 && portalcooldown <= 0)
             {
                 y = 3;
                 portalcooldown = 100;
@@ -133,21 +133,21 @@ namespace Game1
 
         public void updateBorder ()
         {
-            if (x <= dx)
+            if (x - width/2<= dx)
             {
-                x = 1;
+                x = width/2+1;
             }
-            if (x >= Game1.global.windowWidth - width)
+            if (x >= Game1.global.windowWidth - width/2)
             {
-                x = Game1.global.windowWidth - width;
+                x = Game1.global.windowWidth - width/2+1;
             }
-            if (y <= dy)
+            if (y - height/2<= dy)
             {
-                y = 1;
+                y = height/2+1;
             }
-            if (y >= Game1.global.windowHeight - height)
+            if (y >= Game1.global.windowHeight - height/2)
             {
-                y = Game1.global.windowHeight - height;
+                y = Game1.global.windowHeight - height/2+1;
             }
         }
 

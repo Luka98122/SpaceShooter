@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Game1
 {
-    public class Enemy : GameEntity
+    public class Enemy :  GameEntity
     {
         float dx;
         float dy;
         int enemyHP = 1;
-        float speed = 2.9f;
+        float speed = 0.2f;
         static public Texture2D texMario;
 
         public override void initialize()
@@ -56,10 +56,7 @@ namespace Game1
                 dx = -1;
             }
 
-            if (x > Game1.global.player.x - 30 && 
-                x < Game1.global.player.x + 30 && 
-                y > Game1.global.player.y - 30 && 
-                y < Game1.global.player.y + 30)
+            if ( collisionCheck( Game1.global.player) == true)
             {
                 Game1.global.player.state = State.Dead;
             }
@@ -68,10 +65,7 @@ namespace Game1
 
             for (int i = 0; i < Game1.global.ListOfBullets.Count; i++)
             {
-                if (x < Game1.global.ListOfBullets[i].x + 20 &&
-                    x > Game1.global.ListOfBullets[i].x - 20 &&
-                    y < Game1.global.ListOfBullets[i].y + 20 &&
-                   y > Game1.global.ListOfBullets[i].y - 20)
+                if (collisionCheck(Game1.global.ListOfBullets[i]))
                 {
                     Game1.global.ListOfBullets[i].state = State.Dead;
                     enemyHP--;
@@ -86,7 +80,7 @@ namespace Game1
         {
             if (state == State.Dead) { 
                 return;
-            }
+            }   
 
             drawSprite(texMario);
         }

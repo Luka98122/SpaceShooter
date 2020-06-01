@@ -38,6 +38,42 @@ namespace Game1
                 (int)height), 
                 Color.White);
         }
+        protected bool pointInRect(float x, float y, float rx, float ry, float rw, float rh)
+        {
+            bool collided = false;
+
+            if (x > rx &&
+                x < rx + rw &&
+                y > ry &&
+                y < ry + rh)
+            {
+                collided = true;
+            }
+
+            return collided;
+        }
+        protected bool collisionCheck ( GameEntity other)
+        {
+            float ox = other.x - other.width / 2;
+            float oy = other.y - other.height / 2;
+            float ox2 = other.width;
+            float oy2 = other.height;
+
+            float tx = x - width / 2;
+            float ty = y - height / 2;
+
+            if (pointInRect(x - width / 2, y - height / 2, ox, oy, ox2, oy2)) return true;
+            if (pointInRect(x + width / 2, y - height / 2, ox, oy, ox2, oy2)) return true;
+            if (pointInRect(x - width / 2, y + height / 2, ox, oy, ox2, oy2)) return true;
+            if (pointInRect(x + width / 2, y + height / 2, ox, oy, ox2, oy2)) return true;
+
+            if (pointInRect(ox              , oy               , tx, ty, width, height)) return true;
+            if (pointInRect(ox + other.width, oy               , tx, ty, width, height)) return true;
+            if (pointInRect(ox              , oy + other.height, tx, ty, width, height)) return true;
+            if (pointInRect(ox + other.width, oy + other.height, tx, ty, width, height)) return true;
+
+            return false;
+        }
 
     }
 }
