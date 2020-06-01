@@ -11,9 +11,11 @@ namespace Game1
         public int windowHeight = 480;//TODO: remove
         public float dx;
         public float dy;
-        public int bombCount = 3;
         public int portalcooldown = 30;
         static public Texture2D texBall;
+        public int summonCooldown = 20;     
+        public int bombCount = 3;           
+        public int bombcooldown = 20;       
 
         public override void initialize()
         {
@@ -33,18 +35,18 @@ namespace Game1
 
         public void updateSummonEnemies()
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && Game1.global.summonCooldown <= 0)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && summonCooldown <= 0)
             {
                 Enemy MyEnemy = new Enemy();
                 Game1.global.ListOfEnemies.Add(MyEnemy);
-                Game1.global.summonCooldown = 20;
+                summonCooldown = 20;
             }
-            Game1.global.summonCooldown--;
+            summonCooldown--;
         }
 
         // BUG: Portals broken
         public void updateBombing() {
-            if (GamePad.GetState(PlayerIndex.One).Triggers.Right >= 0.7 && bombCount > 0 && Game1.global.bombcooldown < 0)
+            if (GamePad.GetState(PlayerIndex.One).Triggers.Right >= 0.7 && bombCount > 0 && bombcooldown < 0)
             {
                 bombCount--;
                 for (int i = 0; i < Game1.global.ListOfEnemies.Count; i++)
@@ -52,9 +54,9 @@ namespace Game1
                     Game1.global.ListOfEnemies[i].state = GameEntity.State.Dead;
                 }
                 Console.Beep(200, 600);
-                Game1.global.bombcooldown = 10;
+                bombcooldown = 10;
             }
-                Game1.global.bombcooldown--;
+                bombcooldown--;
         }
 
         public void updateMovement ()

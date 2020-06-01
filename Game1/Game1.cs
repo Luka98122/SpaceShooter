@@ -17,13 +17,11 @@ namespace Game1
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
         public int WindowWidth = 800;
-        public int WindowHeight = 480;
+        public int WindowHeight = 480;      
         public List<Bullet> ListOfBullets = new List<Bullet>();
         public int cooldown = 20;
         public int Controlled = 0;
-        public int summonCooldown = 20;
-        public int bombCount = 3;
-        public int bombcooldown = 20;
+        
 
         
 
