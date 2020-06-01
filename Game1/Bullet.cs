@@ -42,7 +42,7 @@ namespace Game1
             x = x + dx*speed;
             y = y + dy*speed;
 
-            if (x<0 || x > Game1.global.WindowWidth || y < 0 || y > Game1.global.WindowHeight)
+            if (x<0 || x > Game1.global.windowWidth || y < 0 || y > Game1.global.windowHeight)
             {
                 state = State.Dead;
             }

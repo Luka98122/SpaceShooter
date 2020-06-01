@@ -16,8 +16,8 @@ namespace Game1
         public static Game1 global = null;
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
-        public int WindowWidth = 800;
-        public int WindowHeight = 480;      
+        public int windowWidth = 800;
+        public int windowHeight = 480;      
         public List<Bullet> ListOfBullets = new List<Bullet>();
         public int cooldown = 20;
         public int Controlled = 0;

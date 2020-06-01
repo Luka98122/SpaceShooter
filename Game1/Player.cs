@@ -7,8 +7,7 @@ namespace Game1
 {
     public class Player : GameEntity
     {
-        public int windowWidth = 800; //TODO: remove
-        public int windowHeight = 480;//TODO: remove
+
         public float dx;
         public float dy;
         public int portalcooldown = 30;
@@ -19,8 +18,8 @@ namespace Game1
 
         public override void initialize()
         {
-            x = Game1.global.rand.Next(1, windowWidth / 2);
-            y = Game1.global.rand.Next(1, windowHeight / 2);
+            x = Game1.global.rand.Next(1, Game1.global.windowWidth / 2);
+            y = Game1.global.rand.Next(1, Game1.global.windowHeight / 2);
             dx = 5;
             dy = 5;
             height = 50;
@@ -109,27 +108,28 @@ namespace Game1
         
         public void updatePortal ()
         {
-            //TODO: use game windowheight
+            
             if (x <= 1 && portalcooldown <= 0)
             {
-                x = width - height - 2;
-                portalcooldown = 400;
+                x = Game1.global.windowWidth - width + 2;
+                portalcooldown = 100;
             }
-            if (x >= width - height - 1 && portalcooldown <= 0)
+            if (x >= Game1.global.windowWidth - width + 1 && portalcooldown <= 0)
             {
                 x = 2;
-                portalcooldown = 400;
+                portalcooldown = 100;
             }
             if (y <= 1 && portalcooldown <= 0)
             {
-                y = height - height - 2;
-                portalcooldown = 400;
+                y = Game1.global.windowHeight - height - 2;
+                portalcooldown = 100;
             }
-            if (y >= height - height - 1 && portalcooldown <= 0)
+            if (y >= Game1.global.windowHeight - height + 2 && portalcooldown <= 0)
             {
-                y = 2;
-                portalcooldown = 400;
+                y = 3;
+                portalcooldown = 100;
             }
+            portalcooldown--;
         }
 
         public void updateBorder ()
@@ -138,17 +138,17 @@ namespace Game1
             {
                 x = 1;
             }
-            if (x >= windowWidth - width)
+            if (x >= Game1.global.windowWidth - width)
             {
-                x = windowWidth - width;
+                x = Game1.global.windowWidth - width;
             }
             if (y <= dy)
             {
                 y = 1;
             }
-            if (y >= windowHeight - height)
+            if (y >= Game1.global.windowHeight - height)
             {
-                y = windowHeight - height;
+                y = Game1.global.windowHeight - height;
             }
         }
 
