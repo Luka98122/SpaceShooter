@@ -86,14 +86,9 @@ namespace Game1
         {
             if (state == State.Dead) { 
                 return;
-            }   
+            }
 
-            Game1.global.spriteBatch.Draw(texMario,
-                new Rectangle((int)x,
-                (int)y,
-                (int)width,
-                (int)height),
-                Color.White);
+            drawSprite(texMario);
         }
     }
 }

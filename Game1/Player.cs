@@ -43,7 +43,6 @@ namespace Game1
             summonCooldown--;
         }
 
-        // BUG: Portals broken
         public void updateBombing() {
             if (GamePad.GetState(PlayerIndex.One).Triggers.Right >= 0.7 && bombCount > 0 && bombcooldown < 0)
             {
@@ -171,7 +170,7 @@ namespace Game1
             {
                 return;
             }
-            Game1.global.spriteBatch.Draw(texBall, new Rectangle((int)x, (int)y, (int)width, (int)height), Color.White);
+            drawSprite(texBall);
         }
     }
 }

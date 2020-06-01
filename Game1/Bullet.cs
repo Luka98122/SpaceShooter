@@ -53,12 +53,7 @@ namespace Game1
             {
                 return;
             }
-            Game1.global.spriteBatch.Draw(texBall,
-                new Rectangle((int)x,
-                (int)y,
-                (int)width,
-                (int)height),
-                Color.White);
+            drawSprite(texBall);
         }
     }
 }

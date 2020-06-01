@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
 
 namespace Game1
 {
@@ -25,6 +28,15 @@ namespace Game1
         public GameEntity()
         {
             initialize();
+        }
+        protected void drawSprite (Texture2D sprite)
+        {
+            Game1.global.spriteBatch.Draw(sprite, 
+                new Rectangle((int)(x-width/2), 
+                (int)(y-height/2), 
+                (int)width, 
+                (int)height), 
+                Color.White);
         }
 
     }
