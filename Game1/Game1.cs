@@ -16,8 +16,8 @@ namespace Game1
         public static Game1 global = null;
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
-        public int windowWidth = 800;
-        public int windowHeight = 480;      
+        public int windowWidth = 1600;
+        public int windowHeight = 800;      
         public List<Bullet> ListOfBullets = new List<Bullet>();
         public int cooldown = 20;
         public int Controlled = 0;
@@ -28,6 +28,9 @@ namespace Game1
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = windowWidth;
+            graphics.PreferredBackBufferHeight = windowHeight;
+            graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             Game1.global = this;
         }

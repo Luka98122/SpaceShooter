@@ -13,7 +13,11 @@ namespace Game1
         float dx;
         float dy;
         int enemyHP = 1;
-        float speed = 0.2f;
+        float speed = 4.2f;
+        float ddx = 0.03f;
+        float ddy = 0.03f;
+        float dxCap = 1.0f;
+        float dyCap = 1.0f;
         static public Texture2D texMario;
 
         public override void initialize()
@@ -24,6 +28,7 @@ namespace Game1
             dy = Game1.global.rand.Next(-1, 1);
             width = 50;
             height = 50;
+            
         }
 
         public static void loadResources()
@@ -32,14 +37,9 @@ namespace Game1
 
         }
 
-        override public void update ()
+        public void updateHoming ()
         {
-            if(state == State.Dead)
-            {
-                return;
-            }
-                        
-            if (y < Game1.global.player.y )
+            if (y < Game1.global.player.y)
             {
                 dy = 1;
             }
@@ -55,26 +55,78 @@ namespace Game1
             {
                 dx = -1;
             }
+            x = x + dx * speed;
+            y = y + dy * speed;
+        }
 
-            if ( collisionCheck( Game1.global.player) == true)
+        public void updateHoming2()
+        {
+            if (y < Game1.global.player.y)
+            {
+                dy = dy + ddy;
+            }
+            if (y > Game1.global.player.y)
+            {
+                dy = dy - ddy;
+            }
+            if (x < Game1.global.player.x)
+            {
+                dx = dx + ddx;
+            }
+            if (x > Game1.global.player.x)
+            {
+                dx = dx - ddx;
+            }
+            if (dx > dxCap)
+                dx = dxCap;
+
+            if (dx < -dxCap)
+                dx = -dxCap;
+
+            if (dy > dyCap)
+                dy = dyCap;
+
+            if (dy < -dyCap)
+                dy = -dyCap;
+
+            x = x + dx * speed;
+            y = y + dy * speed;
+        }
+
+        public void checkPlayerState ()
+        {
+            if (collisionCheck(Game1.global.player) == true)
             {
                 Game1.global.player.state = State.Dead;
             }
-            x = x + dx * speed;
-            y = y + dy * speed;
+        }
 
+        public void checkEnemyState ()
+        {
             for (int i = 0; i < Game1.global.ListOfBullets.Count; i++)
             {
-                if (collisionCheck(Game1.global.ListOfBullets[i]))
+                if (Game1.global.ListOfBullets[i].state != State.Dead && collisionCheck(Game1.global.ListOfBullets[i]))
                 {
                     Game1.global.ListOfBullets[i].state = State.Dead;
                     enemyHP--;
                 }
                 if (enemyHP <= 0)
                 {
-                   state = State.Dead;
+                    state = State.Dead;
                 }
             }
+        }
+        override public void update ()
+        {
+            if(state == State.Dead)
+            {
+                return;
+            }
+            updateHoming2();
+            checkEnemyState();
+            checkPlayerState();
+                        
+            
         }
         override public void draw()
         {

@@ -59,7 +59,7 @@ namespace Game1
 
         public void updateMovement ()
         {
-            int speed = 5;
+            int speed = 4;
             float UD = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y;
             float LR = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X;
             
@@ -99,7 +99,7 @@ namespace Game1
                     MyBullet.x = x;
                     MyBullet.y = y;
                     Game1.global.ListOfBullets.Add(MyBullet);
-                    Game1.global.cooldown = 5;
+                    Game1.global.cooldown = 4;
                 }
                 Game1.global.cooldown--;
             }
