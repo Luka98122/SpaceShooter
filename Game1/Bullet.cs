@@ -15,7 +15,8 @@ namespace Game1
         public float dy;
         public float speed = 5;
         static public Texture2D texBall;
-        
+        static public Texture2D texPlayer;
+
         public override void initialize()
         {
             x = 0;
@@ -31,6 +32,7 @@ namespace Game1
         public static void loadResources()
         {
             texBall = Game1.global.Content.Load<Texture2D>("ball");
+            texPlayer = Game1.global.Content.Load<Texture2D>("player");
         }
         override public void update ()
         {

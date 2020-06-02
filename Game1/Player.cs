@@ -11,7 +11,7 @@ namespace Game1
         public float dx;
         public float dy;
         public int portalcooldown = 30;
-        static public Texture2D texBall;
+        static public Texture2D texPlayer;
         public int summonCooldown = 20;     
         public int bombCount = 3;           
         public int bombcooldown = 20;       
@@ -28,7 +28,7 @@ namespace Game1
         
         public void loadResources()
         {
-            texBall = Game1.global.Content.Load<Texture2D>("ball");
+            texPlayer = Game1.global.Content.Load<Texture2D>("player");
         }
 
 
@@ -170,7 +170,7 @@ namespace Game1
             {
                 return;
             }
-            drawSprite(texBall);
+            drawSprite(texPlayer);
         }
     }
 }
