@@ -12,13 +12,13 @@ namespace Game1
     {
         float dx;
         float dy;
-        int enemyHP = 1;
+        int enemyHP = 3;
         float speed = 4.2f;
         float ddx = 0.03f;
         float ddy = 0.03f;
         float dxCap = 1.0f;
         float dyCap = 1.0f;
-        static public Texture2D texMario;
+        static public Texture2D texAlien;
 
         public override void initialize()
         {
@@ -27,13 +27,13 @@ namespace Game1
             dx = Game1.global.rand.Next(-1, 1);
             dy = Game1.global.rand.Next(-1, 1);
             width = 50;
-            height = 50;
+            height = width / 1.36f;
             
         }
 
         public static void loadResources()
         {
-            texMario =Game1.global.Content.Load<Texture2D>("happy mario");
+            texAlien =Game1.global.Content.Load<Texture2D>("Alien");
 
         }
 
@@ -134,7 +134,7 @@ namespace Game1
                 return;
             }   
 
-            drawSprite(texMario);
+            drawSprite(texAlien);
         }
     }
 }
