@@ -13,7 +13,7 @@ namespace Game1
         public int portalcooldown = 30;
         static public Texture2D texPlayer;
         public int summonCooldown = 20;     
-        public int bombCount = 3;           
+        public int bombCount = 0;           
         public int bombcooldown = 20;       
 
         public override void initialize()
@@ -22,8 +22,8 @@ namespace Game1
             y = Game1.global.rand.Next(1, Game1.global.windowHeight / 2);
             dx = 5;
             dy = 5;
-            height = 50;
-            width = 50;
+            height = 100;
+            width = 100;
         }
         
         public void loadResources()
@@ -161,7 +161,7 @@ namespace Game1
             updateSummonEnemies();
             updateMovement();
             updateShooting();
-            updatePortal();
+            //updatePortal();
             updateBorder();
         }
         public override void draw()

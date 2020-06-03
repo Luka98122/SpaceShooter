@@ -16,8 +16,8 @@ namespace Game1
         float speed = 4.2f;
         float ddx = 0.03f;
         float ddy = 0.03f;
-        float dxCap = 1.0f;
-        float dyCap = 1.0f;
+        float dxCap = 500.900f;
+        float dyCap = 500.900f;
         static public Texture2D texAlien;
 
         public override void initialize()
@@ -97,7 +97,7 @@ namespace Game1
         {
             if (collisionCheck(Game1.global.player) == true)
             {
-                Game1.global.player.state = State.Dead;
+                //Game1.global.player.state = State.Dead;
             }
         }
 

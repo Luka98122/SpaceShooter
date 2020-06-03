@@ -16,6 +16,7 @@ namespace Game1
         public float speed = 5;
         static public Texture2D texBall;
         static public Texture2D texPlayer;
+        static public Texture2D texFireBall;
 
         public override void initialize()
         {
@@ -23,8 +24,8 @@ namespace Game1
             y = 0;
             dx = 0;
             dy = 0;
-            width = 15;
-            height = 15;
+            width = 20;
+            height = 20;
             state = State.Alive;
             
         }
@@ -32,6 +33,7 @@ namespace Game1
         public static void loadResources()
         {
             texBall = Game1.global.Content.Load<Texture2D>("ball");
+            texFireBall = Game1.global.Content.Load<Texture2D>("Bullet");
             texPlayer = Game1.global.Content.Load<Texture2D>("player");
         }
         override public void update ()
@@ -55,7 +57,7 @@ namespace Game1
             {
                 return;
             }
-            drawSprite(texBall);
+            drawSprite(texFireBall);
         }
     }
 }

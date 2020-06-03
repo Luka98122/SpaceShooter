@@ -11,6 +11,7 @@ namespace Game1
     public class Game1 : Game
     {
         public Player player;
+        public Background background;
         public Random rand = new Random();
         public List<Enemy> ListOfEnemies = new List<Enemy>();
         public static Game1 global = null;
@@ -39,7 +40,7 @@ namespace Game1
         protected override void Initialize()
         {
             player = new Player();
-
+            background = new Background();
 
             // Enemy init
             for (int i = 0; i < 10; i++) {
@@ -61,6 +62,7 @@ namespace Game1
             // TODO: use this.Content to load your game content here
             Enemy.loadResources();
             Bullet.loadResources();
+
             
         }
 
@@ -72,7 +74,8 @@ namespace Game1
        
         protected override void Update(GameTime gameTime)
         {
-            if(player.state == GameEntity.State.Dead)
+            
+            if (player.state == GameEntity.State.Dead)
             {
                 Exit();
             }
@@ -81,6 +84,7 @@ namespace Game1
                 Exit();
 
             player.update();
+            background.update();
             
             for(int i = 0;i<ListOfBullets.Count;i++)
             {
@@ -101,11 +105,12 @@ namespace Game1
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.DarkBlue);
             spriteBatch.Begin();
 
             // TODO: Add your drawing code here
+            background.draw();
             player.draw();
+            
             // For all bullets
             // bullet.draw()
             for (int i = 0;i<ListOfBullets.Count;i++)
