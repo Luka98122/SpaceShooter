@@ -51,7 +51,7 @@ namespace Game1
             }
             player.initialize();
             player.loadResources();
-            anim.initialize("explosion sheet");
+            anim.initialize("explosion sheet", 8,6);
             base.Initialize();
 
         }
@@ -128,7 +128,9 @@ namespace Game1
 
             }
             player.draw();
-            anim.draw(new Rectangle(5,5,300,300),10);
+            
+            anim.draw(new Rectangle(5, 5, 300, 300));
+            
             spriteBatch.End();
             base.Draw(gameTime);
         }
