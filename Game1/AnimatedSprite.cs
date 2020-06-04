@@ -27,7 +27,7 @@ namespace Game1
             sheet = Game1.global.Content.Load<Texture2D>(name);
             spriteWidth = sheet.Width / rowLength;
             spriteHeight = sheet.Height / rowCount;
-
+            cooldown = animationDelay;
             this.animationDelay = animationDelay;
         }
         public void animate()
