@@ -51,7 +51,7 @@ namespace Game1
             }
             player.initialize();
             player.loadResources();
-            anim.initialize("explosion sheet", 8,6);
+            anim.initialize("explosion sheet", 8,6,5);
             base.Initialize();
 
         }

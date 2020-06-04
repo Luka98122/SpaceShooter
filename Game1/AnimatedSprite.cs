@@ -17,7 +17,9 @@ namespace Game1
         public int frameCounter = 0;
         int spriteWidth;
         int spriteHeight;
-        public void initialize (string name,int RowLength, int RowCount)
+        public int cooldown;
+        public int animationDelay;
+        public void initialize (string name,int RowLength, int RowCount, int animationDelay)
         {
             rowLength = RowLength;
             rowCount = RowCount;
@@ -25,6 +27,8 @@ namespace Game1
             sheet = Game1.global.Content.Load<Texture2D>(name);
             spriteWidth = sheet.Width / rowLength;
             spriteHeight = sheet.Height / rowCount;
+
+            this.animationDelay = animationDelay;
         }
         public void animate()
         {
@@ -35,7 +39,6 @@ namespace Game1
         }
         public void draw (Rectangle rectDest)
         {
-            
             int frameX;
             int frameY;
             Rectangle rectSource = new Rectangle();
@@ -46,14 +49,22 @@ namespace Game1
     
             rectSource.X = frameX*spriteWidth;
             rectSource.Y = frameY*spriteHeight;
-            rectSource.Width = 256;
-            rectSource.Height = 248;
+            rectSource.Width = spriteWidth;
+            rectSource.Height = spriteHeight;
             Game1.global.spriteBatch.Draw(sheet, rectDest, rectSource, Color.White);
-            frameCounter++;
-            if(frameCounter > rowLength* rowCount)
+
+            cooldown--;
+            if (cooldown <= 0)
             {
-                frameCounter = 0;
+                frameCounter++;
+                if (frameCounter > rowLength * rowCount)
+                {
+                    frameCounter = 0;
+                }
+
+                cooldown = animationDelay;
             }
+            
         }
 
     } 
