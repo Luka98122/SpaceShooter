@@ -11,6 +11,7 @@ namespace Game1
     public class Game1 : Game
     {
         public Player player;
+        public AnimatedSprite anim;
         public Background background;
         public Random rand = new Random();
         public List<Enemy> ListOfEnemies = new List<Enemy>();
@@ -41,6 +42,7 @@ namespace Game1
         {
             player = new Player();
             background = new Background();
+            anim = new AnimatedSprite();
 
             // Enemy init
             for (int i = 0; i < 10; i++) {
@@ -49,6 +51,7 @@ namespace Game1
             }
             player.initialize();
             player.loadResources();
+            anim.initialize("explosion sheet");
             base.Initialize();
 
         }
@@ -109,7 +112,7 @@ namespace Game1
 
             // TODO: Add your drawing code here
             background.draw();
-            player.draw();
+            
             
             // For all bullets
             // bullet.draw()
@@ -124,7 +127,8 @@ namespace Game1
                 ListOfEnemies[i].draw();
 
             }
-
+            player.draw();
+            anim.draw(new Rectangle(5,5,300,300),10);
             spriteBatch.End();
             base.Draw(gameTime);
         }

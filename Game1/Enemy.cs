@@ -16,8 +16,8 @@ namespace Game1
         float speed = 4.2f;
         float ddx = 0.03f;
         float ddy = 0.03f;
-        float dxCap = 500.900f;
-        float dyCap = 500.900f;
+        float dxCap = 2.0f;
+        float dyCap = 2.0f;
         static public Texture2D texAlien;
 
         public override void initialize()

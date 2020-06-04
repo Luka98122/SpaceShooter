@@ -18,8 +18,8 @@ namespace Game1
 
         public override void initialize()
         {
-            x = Game1.global.rand.Next(1, Game1.global.windowWidth / 2);
-            y = Game1.global.rand.Next(1, Game1.global.windowHeight / 2);
+            x = 0 + width;
+            y = 0 + height;
             dx = 5;
             dy = 5;
             height = 100;
