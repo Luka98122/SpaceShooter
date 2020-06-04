@@ -129,7 +129,7 @@ namespace Game1
             }
             player.draw();
             
-            anim.draw(new Rectangle(5, 5, 300, 300));
+            anim.draw(new Rectangle(1200, 400, 300, 300));
             
             spriteBatch.End();
             base.Draw(gameTime);
