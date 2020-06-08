@@ -12,14 +12,16 @@ namespace Game1
     public class AnimatedSprite
     {
         public Texture2D sheet;
+        public double x;
+        public double y;
         public int rowLength;
         public int rowCount;
         public int frameCounter = 0;
-        int spriteWidth;
-        int spriteHeight;
-        public int cooldown;
-        public int animationDelay;
-        public void initialize (string name,int RowLength, int RowCount, int animationDelay)
+        public int spriteWidth;
+        public int spriteHeight;
+        public double cooldown;
+        public double animationDelay;
+        public void initialize (string name,int RowLength, int RowCount, double animationDelay)
         {
             rowLength = RowLength;
             rowCount = RowCount;
@@ -30,13 +32,7 @@ namespace Game1
             cooldown = animationDelay;
             this.animationDelay = animationDelay;
         }
-        public void animate()
-        {
-            for (int i = 0; i < 8; i++)
-            {
-                
-            }
-        }
+        
         public void draw (Rectangle rectDest)
         {
             int frameX;
@@ -51,7 +47,8 @@ namespace Game1
             rectSource.Y = frameY*spriteHeight;
             rectSource.Width = spriteWidth;
             rectSource.Height = spriteHeight;
-            Game1.global.spriteBatch.Draw(sheet, rectDest, rectSource, Color.White);
+            Color c = new Color(1.0f, 1.0f, 1.0f, 0.7f);
+            Game1.global.spriteBatch.Draw(sheet, rectDest, rectSource, c);
 
             cooldown--;
             if (cooldown <= 0)
@@ -62,7 +59,7 @@ namespace Game1
                     frameCounter = 0;
                 }
 
-                cooldown = animationDelay;
+                cooldown += animationDelay;
             }
             
         }

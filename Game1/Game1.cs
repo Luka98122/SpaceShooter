@@ -10,8 +10,8 @@ namespace Game1
 {
     public class Game1 : Game
     {
+        ExplosionEffect test = new ExplosionEffect();
         public Player player;
-        public AnimatedSprite anim;
         public Background background;
         public Random rand = new Random();
         public List<Enemy> ListOfEnemies = new List<Enemy>();
@@ -23,6 +23,7 @@ namespace Game1
         public List<Bullet> ListOfBullets = new List<Bullet>();
         public int cooldown = 20;
         public int Controlled = 0;
+        public EffectsManager effectsManager = new EffectsManager();
         
 
         
@@ -42,7 +43,6 @@ namespace Game1
         {
             player = new Player();
             background = new Background();
-            anim = new AnimatedSprite();
 
             // Enemy init
             for (int i = 0; i < 10; i++) {
@@ -51,7 +51,7 @@ namespace Game1
             }
             player.initialize();
             player.loadResources();
-            anim.initialize("explosion sheet", 8,6,2);
+            test.initalize();
             base.Initialize();
 
         }
@@ -88,7 +88,7 @@ namespace Game1
 
             player.update();
             background.update();
-            
+            test.update();
             for(int i = 0;i<ListOfBullets.Count;i++)
             {
                 ListOfBullets[i].update();
@@ -128,10 +128,13 @@ namespace Game1
 
             }
             player.draw();
-            Thread.Sleep(1);
-            anim.draw(new Rectangle(1200, 400, 300, 300));
-            
             spriteBatch.End();
+
+            // Draw effects
+            spriteBatch.Begin(SpriteSortMode.Deferred,BlendState.Additive);
+            test.draw();
+            spriteBatch.End();
+
             base.Draw(gameTime);
         }
     }

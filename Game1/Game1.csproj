@@ -44,6 +44,8 @@
   <ItemGroup>
     <Compile Include="AnimatedSprite.cs" />
     <Compile Include="Background.cs" />
+    <Compile Include="EffectsManager.cs" />
+    <Compile Include="ExplosionEffect.cs" />
     <Compile Include="GameEntity.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Bullet.cs" />

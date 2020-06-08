@@ -13,7 +13,7 @@ namespace Game1
         public int portalcooldown = 30;
         static public Texture2D texPlayer;
         public int summonCooldown = 20;     
-        public int bombCount = 0;           
+        public int bombCount = 1;           
         public int bombcooldown = 20;       
 
         public override void initialize()
