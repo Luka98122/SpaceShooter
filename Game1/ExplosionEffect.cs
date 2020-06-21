@@ -7,36 +7,33 @@ using System.Threading.Tasks;
 
 namespace Game1
 {
-    class ExplosionEffect
+    public class ExplosionEffect
     {
-        public int x;
-        public int y;
+        public float x;
+        public float y;
         public float width;
         public float height;
         public float size;
         public float spread;
         public List<AnimatedSprite> explosions = new List<AnimatedSprite>();
-        public void initalize ()
+        public GameEntity.State state = GameEntity.State.Alive;
+        public ExplosionEffect ()
         {
             spread = 0.4f;
             x = 1000;
             y = 400;
-            size = 100;
+            size = 50;
             for (int i = 0;i<10;i++)
             {
-                AnimatedSprite anim = new AnimatedSprite();
+                AnimatedSprite anim = new AnimatedSprite("explosion sheet", 8, 6, Game1.global.rand.NextDouble() * 2 + 1);
                 anim.x = Game1.global.rand.NextDouble()*2 - 1;
                 anim.y = Game1.global.rand.NextDouble()*2 - 1;
-                anim.initialize("explosion sheet",8,6,Game1.global.rand.NextDouble()*2 + 1);
                 explosions.Add(anim);
             }
         }
         public void update ()
         {
-            for(int i = 0;i<explosions.Count;i++)
-            {
-                
-            }
+            //Nothing to update
         }
 
         public void draw ()
@@ -49,9 +46,17 @@ namespace Game1
                 r.Y = (int)(y + explosions[i].y*spread*size);
                 r.Width = (int)size;
                 r.Height = (int)size;
+                
 
+                if (explosions[i].state == GameEntity.State.Dead)
+                {
+                    explosions.RemoveAt(i);
 
-                explosions[i].draw(r);
+                }
+                else
+                {
+                    explosions[i].draw(r);
+                }
             }
         }
     }

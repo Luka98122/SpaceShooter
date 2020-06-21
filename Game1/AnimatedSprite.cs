@@ -11,6 +11,7 @@ namespace Game1
 {
     public class AnimatedSprite
     {
+        
         public Texture2D sheet;
         public double x;
         public double y;
@@ -21,7 +22,10 @@ namespace Game1
         public int spriteHeight;
         public double cooldown;
         public double animationDelay;
-        public void initialize (string name,int RowLength, int RowCount, double animationDelay)
+        public int frameX;
+        public int frameY;
+        public GameEntity.State state = GameEntity.State.Alive;
+        public  AnimatedSprite (string name,int RowLength, int RowCount, double animationDelay)
         {
             rowLength = RowLength;
             rowCount = RowCount;
@@ -35,8 +39,11 @@ namespace Game1
         
         public void draw (Rectangle rectDest)
         {
-            int frameX;
-            int frameY;
+            if (state == GameEntity.State.Dead)
+            {
+                return;
+            }
+
             Rectangle rectSource = new Rectangle();
 
             frameY = frameCounter / rowLength;
@@ -56,7 +63,7 @@ namespace Game1
                 frameCounter++;
                 if (frameCounter > rowLength * rowCount)
                 {
-                    frameCounter = 0;
+                    state = GameEntity.State.Dead;
                 }
 
                 cooldown += animationDelay;

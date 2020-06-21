@@ -7,7 +7,6 @@ namespace Game1
 {
     public class Player : GameEntity
     {
-
         public float dx;
         public float dy;
         public int portalcooldown = 30;
@@ -30,7 +29,6 @@ namespace Game1
         {
             texPlayer = Game1.global.Content.Load<Texture2D>("player");
         }
-
 
         public void updateSummonEnemies()
         {
@@ -99,7 +97,7 @@ namespace Game1
                     MyBullet.x = x;
                     MyBullet.y = y;
                     Game1.global.ListOfBullets.Add(MyBullet);
-                    Game1.global.cooldown = 1;
+                    Game1.global.cooldown = 4;
                 }
                 Game1.global.cooldown--;
             }
@@ -107,7 +105,6 @@ namespace Game1
         
         public void updatePortal ()
         {
-            
             if (x - width/2 <= 2 && portalcooldown <= 0)
             {
                 x = Game1.global.windowWidth - width + 2;

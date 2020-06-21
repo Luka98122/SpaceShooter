@@ -10,7 +10,6 @@ namespace Game1
 {
     public class Game1 : Game
     {
-        ExplosionEffect test = new ExplosionEffect();
         public Player player;
         public Background background;
         public Random rand = new Random();
@@ -25,9 +24,6 @@ namespace Game1
         public int Controlled = 0;
         public EffectsManager effectsManager = new EffectsManager();
         
-
-        
-
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -37,7 +33,6 @@ namespace Game1
             Content.RootDirectory = "Content";
             Game1.global = this;
         }
-
         
         protected override void Initialize()
         {
@@ -51,11 +46,10 @@ namespace Game1
             }
             player.initialize();
             player.loadResources();
-            test.initalize();
+            effectsManager.initalize();
             base.Initialize();
 
         }
-        
 
         protected override void LoadContent()
         {
@@ -73,7 +67,6 @@ namespace Game1
         {
             // TODO: Unload any non ContentManager content here
         }
-
        
         protected override void Update(GameTime gameTime)
         {
@@ -88,7 +81,7 @@ namespace Game1
 
             player.update();
             background.update();
-            test.update();
+            
             for(int i = 0;i<ListOfBullets.Count;i++)
             {
                 ListOfBullets[i].update();
@@ -97,6 +90,7 @@ namespace Game1
                     ListOfBullets.RemoveAt(i);
                 }
             }
+            
 
             for(int i = 0;i < ListOfEnemies.Count; i++)
             {
@@ -104,8 +98,6 @@ namespace Game1
             }
         }
         
-
-
         protected override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
@@ -130,9 +122,11 @@ namespace Game1
             player.draw();
             spriteBatch.End();
 
+            
+
             // Draw effects
             spriteBatch.Begin(SpriteSortMode.Deferred,BlendState.Additive);
-            test.draw();
+            effectsManager.draw();
             spriteBatch.End();
 
             base.Draw(gameTime);

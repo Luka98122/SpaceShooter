@@ -34,7 +34,6 @@ namespace Game1
         public static void loadResources()
         {
             texAlien =Game1.global.Content.Load<Texture2D>("Alien");
-
         }
 
         public void updateHoming ()
@@ -113,6 +112,9 @@ namespace Game1
                 if (enemyHP <= 0)
                 {
                     state = State.Dead;
+                    
+                    Game1.global.effectsManager.addExplosion(x,y);
+
                 }
             }
         }
@@ -125,8 +127,6 @@ namespace Game1
             updateHoming2();
             checkEnemyState();
             checkPlayerState();
-                        
-            
         }
         override public void draw()
         {
