@@ -36,9 +36,9 @@ namespace Game1
                 Game1.global.effectsManager.listOfExplosionEffects[i].draw();
             }
         }
-        public void addExplosion (float X, float Y)
+        public void addExplosion (float X, float Y, float size)
         {
-            ExplosionEffect explosionEffect = new ExplosionEffect();
+            ExplosionEffect explosionEffect = new ExplosionEffect(size);
             explosionEffect.x = X;
             explosionEffect.y = Y;
             listOfExplosionEffects.Add(explosionEffect);

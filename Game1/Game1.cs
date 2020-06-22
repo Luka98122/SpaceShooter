@@ -23,7 +23,7 @@ namespace Game1
         public int cooldown = 20;
         public int Controlled = 0;
         public EffectsManager effectsManager = new EffectsManager();
-        public int debugMode = 0;
+        public int debugMode = 1;
         
         public Game1()
         {
@@ -38,7 +38,13 @@ namespace Game1
         int debugCooldown = 100;
         public void updateDebug ()
         {
-            effectsManager.addExplosion(100, 100);
+            debugCooldown--;
+            if (debugCooldown <= 0)
+            {
+                effectsManager.addExplosion(100, 100,100);
+                debugCooldown = 100;
+            }
+
         }
         protected override void Initialize()
         {
@@ -71,7 +77,7 @@ namespace Game1
         {
             // TODO: Unload any non ContentManager content here
         }
-       
+
         protected override void Update(GameTime gameTime)
         {
             if (player.state == GameEntity.State.Dead)
@@ -84,29 +90,25 @@ namespace Game1
 
             player.update();
             background.update();
-            
-            for(int i = 0;i<ListOfBullets.Count;i++)
+
+            for (int i = 0; i < ListOfBullets.Count; i++)
             {
                 ListOfBullets[i].update();
-                if(ListOfBullets[i].state == GameEntity.State.Dead)
+                if (ListOfBullets[i].state == GameEntity.State.Dead)
                 {
                     ListOfBullets.RemoveAt(i);
                 }
             }
-            
 
-            for(int i = 0;i < ListOfEnemies.Count; i++)
+
+            for (int i = 0; i < ListOfEnemies.Count; i++)
             {
                 ListOfEnemies[i].update();
             }
-
-            debugCooldown--;
-            if(debugCooldown<= 0)
-            {
-                //updateDebug();
-                debugCooldown = 100;
-            }
+            updateDebug();
         }
+            
+            
         
         protected override void Draw(GameTime gameTime)
         {

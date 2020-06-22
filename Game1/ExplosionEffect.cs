@@ -15,14 +15,16 @@ namespace Game1
         public float height;
         public float size;
         public float spread;
+        public float xCover = 4f;
+        public float yCover = 4f;
         public List<AnimatedSprite> explAnims = new List<AnimatedSprite>();
         public GameEntity.State state = GameEntity.State.Alive;
-        public ExplosionEffect ()
+        public ExplosionEffect (float size)
         {
             spread = 0.9f;
             x = 1000;
             y = 400;
-            size = 50;
+            this.size = size;
             int cAnims = Game1.global.rand.Next(4, 10);
             cAnims = Game1.global.rand.Next(4,10);
             for (int i = 0; i<cAnims; i++)
@@ -51,8 +53,8 @@ namespace Game1
                 Rectangle r = new Rectangle(0,0, 0,0);
                 r.X = (int)(x + explAnims[i].x*spread*size);
                 r.Y = (int)(y + explAnims[i].y*spread*size);
-                r.Width = (int)100;
-                r.Height = (int)100;
+                r.Width = (int)(size*xCover);
+                r.Height = (int)(size*yCover);
                 
                 explAnims[i].draw(r);
             }

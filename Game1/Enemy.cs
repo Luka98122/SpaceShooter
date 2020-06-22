@@ -18,6 +18,9 @@ namespace Game1
         float ddy = 0.03f;
         float dxCap = 2.0f;
         float dyCap = 2.0f;
+        public float explosionXoffset;
+        public float explosionYoffset;
+        public float size;
 
         static public Texture2D texAlien;
 
@@ -32,6 +35,10 @@ namespace Game1
             dy = Game1.global.rand.Next(-1, 1);
             width = 50;
             height = width / 1.36f;
+            explosionXoffset = width/2;
+            explosionYoffset = height / 2;
+            size = width+0.1f;
+
         }
 
         public static void loadResources()
@@ -116,7 +123,7 @@ namespace Game1
                 {
                     state = State.Dead;
                     
-                    Game1.global.effectsManager.addExplosion(x-50,y-10);
+                    Game1.global.effectsManager.addExplosion(x-explosionXoffset*Game1.global.effectsManager.listOfExplosionEffects[0].xCover,y- explosionYoffset*Game1.global.effectsManager.listOfExplosionEffects[0].xCover, size);
 
                 }
             }
