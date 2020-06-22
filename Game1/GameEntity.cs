@@ -74,6 +74,5 @@ namespace Game1
 
             return false;
         }
-
     }
 }

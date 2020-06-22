@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -11,7 +12,6 @@ namespace Game1
 {
     public class AnimatedSprite
     {
-        
         public Texture2D sheet;
         public double x;
         public double y;
@@ -35,6 +35,7 @@ namespace Game1
             spriteHeight = sheet.Height / rowCount;
             cooldown = animationDelay;
             this.animationDelay = animationDelay;
+            Debug.WriteLine("Anim delay " + animationDelay);
         }
         
         public void draw (Rectangle rectDest)
@@ -48,7 +49,6 @@ namespace Game1
 
             frameY = frameCounter / rowLength;
             frameX = frameCounter % rowLength;
-            
     
             rectSource.X = frameX*spriteWidth;
             rectSource.Y = frameY*spriteHeight;

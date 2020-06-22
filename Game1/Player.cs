@@ -87,7 +87,7 @@ namespace Game1
             float shooterX = GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.X;
             float shooterY = GamePad.GetState(PlayerIndex.One).ThumbSticks.Right.Y;
 
-            if (shooterX >= 0.3 || shooterX <= -0.3 || shooterY >= 0.3 || shooterY <= -0.3)
+            if (shooterX >= 0.1 || shooterX <= -0.1 || shooterY >= 0.1 || shooterY <= -0.1)
             {
                 if (Game1.global.cooldown == 0)
                 {
@@ -97,10 +97,21 @@ namespace Game1
                     MyBullet.x = x;
                     MyBullet.y = y;
                     Game1.global.ListOfBullets.Add(MyBullet);
-                    Game1.global.cooldown = 4;
+                    Game1.global.cooldown = 1;
                 }
                 Game1.global.cooldown--;
             }
+        }
+        public void StopLag ()
+        {
+            if(GamePad.GetState(PlayerIndex.One).Buttons.X == ButtonState.Pressed )
+            {
+                for(int i = 0;i<Game1.global.ListOfBullets.Count;i++)
+                {
+                    Game1.global.ListOfBullets[i].state = State.Dead;
+                }
+            }
+            
         }
         
         public void updatePortal ()
@@ -160,6 +171,7 @@ namespace Game1
             updateShooting();
             //updatePortal();
             updateBorder();
+            StopLag();
         }
         public override void draw()
         {

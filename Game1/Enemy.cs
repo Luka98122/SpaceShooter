@@ -18,17 +18,20 @@ namespace Game1
         float ddy = 0.03f;
         float dxCap = 2.0f;
         float dyCap = 2.0f;
+
         static public Texture2D texAlien;
 
         public override void initialize()
         {
+            if(Game1.global.debugMode == 1) {
+                speed = 0;
+            }
             x = Game1.global.rand.Next(Game1.global.windowWidth / 2, Game1.global.windowWidth);
             y = Game1.global.rand.Next(Game1.global.windowHeight / 2, Game1.global.windowHeight);
             dx = Game1.global.rand.Next(-1, 1);
             dy = Game1.global.rand.Next(-1, 1);
             width = 50;
             height = width / 1.36f;
-            
         }
 
         public static void loadResources()
@@ -94,9 +97,9 @@ namespace Game1
 
         public void checkPlayerState ()
         {
-            if (collisionCheck(Game1.global.player) == true)
+            if (collisionCheck(Game1.global.player) == true && Game1.global.debugMode == 0)
             {
-                //Game1.global.player.state = State.Dead;
+                Game1.global.player.state = State.Dead;
             }
         }
 
@@ -109,11 +112,11 @@ namespace Game1
                     Game1.global.ListOfBullets[i].state = State.Dead;
                     enemyHP--;
                 }
-                if (enemyHP <= 0)
+                if (enemyHP <= 0 && state!= State.Dead)
                 {
                     state = State.Dead;
                     
-                    Game1.global.effectsManager.addExplosion(x,y);
+                    Game1.global.effectsManager.addExplosion(x-50,y-10);
 
                 }
             }

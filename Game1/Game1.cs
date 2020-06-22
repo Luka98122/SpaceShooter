@@ -23,6 +23,7 @@ namespace Game1
         public int cooldown = 20;
         public int Controlled = 0;
         public EffectsManager effectsManager = new EffectsManager();
+        public int debugMode = 0;
         
         public Game1()
         {
@@ -33,14 +34,19 @@ namespace Game1
             Content.RootDirectory = "Content";
             Game1.global = this;
         }
-        
+
+        int debugCooldown = 100;
+        public void updateDebug ()
+        {
+            effectsManager.addExplosion(100, 100);
+        }
         protected override void Initialize()
         {
             player = new Player();
             background = new Background();
 
             // Enemy init
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < rand.Next(5,50); i++) {
                  Enemy MyEnemy = new Enemy();
                 ListOfEnemies.Add(MyEnemy);
             }
@@ -59,8 +65,6 @@ namespace Game1
             // TODO: use this.Content to load your game content here
             Enemy.loadResources();
             Bullet.loadResources();
-
-            
         }
 
         protected override void UnloadContent()
@@ -70,7 +74,6 @@ namespace Game1
        
         protected override void Update(GameTime gameTime)
         {
-            
             if (player.state == GameEntity.State.Dead)
             {
                 Exit();
@@ -96,6 +99,13 @@ namespace Game1
             {
                 ListOfEnemies[i].update();
             }
+
+            debugCooldown--;
+            if(debugCooldown<= 0)
+            {
+                //updateDebug();
+                debugCooldown = 100;
+            }
         }
         
         protected override void Draw(GameTime gameTime)
@@ -104,7 +114,6 @@ namespace Game1
 
             // TODO: Add your drawing code here
             background.draw();
-            
             
             // For all bullets
             // bullet.draw()
@@ -122,11 +131,10 @@ namespace Game1
             player.draw();
             spriteBatch.End();
 
-            
-
             // Draw effects
             spriteBatch.Begin(SpriteSortMode.Deferred,BlendState.Additive);
             effectsManager.draw();
+            //test.draw();
             spriteBatch.End();
 
             base.Draw(gameTime);
