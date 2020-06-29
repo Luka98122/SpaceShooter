@@ -12,7 +12,7 @@ namespace Game1
     {
         float dx;
         float dy;
-        int enemyHP = 3;
+        int enemyHP = 1;
         float speed = 4.2f;
         float ddx = 0.03f;
         float ddy = 0.03f;
@@ -35,8 +35,8 @@ namespace Game1
             dy = Game1.global.rand.Next(-1, 1);
             width = 50;
             height = width / 1.36f;
-            explosionXoffset = width/2;
-            explosionYoffset = height / 2;
+            explosionXoffset = width*2;
+            explosionYoffset = height*2;
             size = width+0.1f;
 
         }
@@ -123,7 +123,9 @@ namespace Game1
                 {
                     state = State.Dead;
                     
-                    Game1.global.effectsManager.addExplosion(x-explosionXoffset*Game1.global.effectsManager.listOfExplosionEffects[0].xCover,y- explosionYoffset*Game1.global.effectsManager.listOfExplosionEffects[0].xCover, size);
+                    Game1.global.effectsManager.addExplosion(
+                        x-explosionXoffset,
+                        y- explosionYoffset, size);
 
                 }
             }

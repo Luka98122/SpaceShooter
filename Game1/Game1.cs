@@ -23,7 +23,8 @@ namespace Game1
         public int cooldown = 20;
         public int Controlled = 0;
         public EffectsManager effectsManager = new EffectsManager();
-        public int debugMode = 1;
+        public int debugMode = 0;
+        public ExplosionEffect expy;
         
         public Game1()
         {
@@ -41,7 +42,7 @@ namespace Game1
             debugCooldown--;
             if (debugCooldown <= 0)
             {
-                effectsManager.addExplosion(100, 100,100);
+                effectsManager.addExplosion(100, 100,5000);
                 debugCooldown = 100;
             }
 
@@ -93,7 +94,7 @@ namespace Game1
 
             for (int i = 0; i < ListOfBullets.Count; i++)
             {
-                ListOfBullets[i].update();
+                //ListOfBullets[i].update();
                 if (ListOfBullets[i].state == GameEntity.State.Dead)
                 {
                     ListOfBullets.RemoveAt(i);
@@ -108,7 +109,7 @@ namespace Game1
             updateDebug();
         }
             
-            
+        
         
         protected override void Draw(GameTime gameTime)
         {

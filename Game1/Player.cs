@@ -34,9 +34,15 @@ namespace Game1
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && summonCooldown <= 0)
             {
-                Enemy MyEnemy = new Enemy();
-                Game1.global.ListOfEnemies.Add(MyEnemy);
-                summonCooldown = 20;
+                for (int i = 0; i < 2; i++)
+                {
+                    Enemy MyEnemy = new Enemy();
+                    Game1.global.ListOfEnemies.Add(MyEnemy);
+                    if(i == 10)
+                    {
+                        summonCooldown = 100;
+                    }
+                }
             }
             summonCooldown--;
         }
@@ -57,7 +63,7 @@ namespace Game1
 
         public void updateMovement ()
         {
-            int speed = 4;
+            int speed = 10;
             float UD = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y;
             float LR = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X;
             
@@ -91,13 +97,16 @@ namespace Game1
             {
                 if (Game1.global.cooldown == 0)
                 {
-                    Bullet MyBullet = new Bullet();
-                    MyBullet.dx = shooterX;
-                    MyBullet.dy = -shooterY;
-                    MyBullet.x = x;
-                    MyBullet.y = y;
-                    Game1.global.ListOfBullets.Add(MyBullet);
-                    Game1.global.cooldown = 1;
+                    for (int i = 0; i < 2; i++)
+                    {
+                        Bullet MyBullet = new Bullet();
+                        MyBullet.dx = shooterX;
+                        MyBullet.dy = -shooterY;
+                        MyBullet.x = x;
+                        MyBullet.y = y;
+                        Game1.global.ListOfBullets.Add(MyBullet);
+                        Game1.global.cooldown = 1;
+                    }
                 }
                 Game1.global.cooldown--;
             }
