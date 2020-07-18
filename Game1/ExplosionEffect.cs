@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Game1
 {
+
     public class ExplosionEffect
     {
         public float x;

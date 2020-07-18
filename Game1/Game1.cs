@@ -25,6 +25,7 @@ namespace Game1
         public EffectsManager effectsManager = new EffectsManager();
         public int debugMode = 0;
         public ExplosionEffect expy;
+        public SpawnManager spawnManager = new SpawnManager() { };
         
         public Game1()
         {
@@ -57,6 +58,7 @@ namespace Game1
                  Enemy MyEnemy = new Enemy();
                 ListOfEnemies.Add(MyEnemy);
             }
+            spawnManager.initalize();
             player.initialize();
             player.loadResources();
             effectsManager.initalize();
@@ -89,7 +91,12 @@ namespace Game1
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            player.update();
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Y == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+                spawnManager.addCornerWave();
+            }
+            spawnManager.update();
+                player.update();
             background.update();
 
             for (int i = 0; i < ListOfBullets.Count; i++)
