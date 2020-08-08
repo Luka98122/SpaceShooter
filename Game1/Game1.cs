@@ -101,7 +101,7 @@ namespace Game1
 
             for (int i = 0; i < ListOfBullets.Count; i++)
             {
-                //ListOfBullets[i].update();
+                ListOfBullets[i].update();
                 if (ListOfBullets[i].state == GameEntity.State.Dead)
                 {
                     ListOfBullets.RemoveAt(i);

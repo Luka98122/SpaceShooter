@@ -116,7 +116,7 @@ namespace Game1
             {
                 if (Game1.global.ListOfBullets[i].state != State.Dead && collisionCheck(Game1.global.ListOfBullets[i]))
                 {
-                    //Game1.global.ListOfBullets[i].state = State.Dead;
+                    Game1.global.ListOfBullets[i].state = State.Dead;
                     enemyHP--;
                 }
                 if (enemyHP <= 0 && state!= State.Dead)
