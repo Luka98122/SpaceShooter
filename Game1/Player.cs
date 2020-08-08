@@ -13,7 +13,10 @@ namespace Game1
         static public Texture2D texPlayer;
         public int summonCooldown = 20;     
         public int bombCount = 1;           
-        public int bombcooldown = 20;       
+        public int bombcooldown = 20;
+        public int lives = 3;
+        public int missingPlayerTimer = 100;
+        public int playerMissing = 0;
 
         public override void initialize()
         {
@@ -174,21 +177,35 @@ namespace Game1
             {
                 return;
             }
-            updateBombing();
-            updateSummonEnemies();
-            updateMovement();
-            updateShooting();
-            //updatePortal();
-            updateBorder();
-            StopLag();
+            if (playerMissing == 1)
+            {
+                missingPlayerTimer--;
+            }
+            if (missingPlayerTimer < 0)
+            {
+                playerMissing = 0;
+                missingPlayerTimer = 100;
+            }
+            if (playerMissing == 0)
+            {
+                updateBombing();
+                updateSummonEnemies();
+                updateMovement();
+                updateShooting();
+                //updatePortal();
+                updateBorder();
+                StopLag();
+            }
+            
         }
         public override void draw()
         {
-            if (state == State.Dead)
+            if (state == State.Dead )
             {
                 return;
             }
-            drawSprite(texPlayer);
+            if(playerMissing == 0)
+                drawSprite(texPlayer);
         }
     }
 }

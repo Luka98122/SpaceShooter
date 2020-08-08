@@ -26,6 +26,7 @@ namespace Game1
         public int debugMode = 0;
         public ExplosionEffect expy;
         public SpawnManager spawnManager = new SpawnManager() { };
+        public HUD Hud;
         
         public Game1()
         {
@@ -51,6 +52,7 @@ namespace Game1
         protected override void Initialize()
         {
             player = new Player();
+            Hud = new HUD();
             background = new Background();
 
             // Enemy init
@@ -62,6 +64,7 @@ namespace Game1
             player.initialize();
             player.loadResources();
             effectsManager.initalize();
+            Hud.initialize();
             base.Initialize();
 
         }
@@ -74,6 +77,7 @@ namespace Game1
             // TODO: use this.Content to load your game content here
             Enemy.loadResources();
             Bullet.loadResources();
+            Hud.loadRecources();
         }
 
         protected override void UnloadContent()
@@ -96,7 +100,8 @@ namespace Game1
                 spawnManager.addCornerWave();
             }
             spawnManager.update();
-                player.update();
+            player.update();
+            Hud.update();
             background.update();
 
             for (int i = 0; i < ListOfBullets.Count; i++)
@@ -108,7 +113,6 @@ namespace Game1
                 }
             }
 
-
             for (int i = 0; i < ListOfEnemies.Count; i++)
             {
                 ListOfEnemies[i].update();
@@ -116,8 +120,6 @@ namespace Game1
             updateDebug();
         }
             
-        
-        
         protected override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
@@ -139,6 +141,7 @@ namespace Game1
 
             }
             player.draw();
+            Hud.draw();
             spriteBatch.End();
 
             // Draw effects

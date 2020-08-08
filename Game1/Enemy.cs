@@ -26,9 +26,7 @@ namespace Game1
 
         public override void initialize()
         {
-            if(Game1.global.debugMode == 1) {
-                speed = 0;
-            }
+            
             x = Game1.global.rand.Next(Game1.global.windowWidth / 2, Game1.global.windowWidth);
             y = Game1.global.rand.Next(Game1.global.windowHeight / 2, Game1.global.windowHeight);
             dx = Game1.global.rand.Next(-1, 1);
@@ -104,9 +102,24 @@ namespace Game1
 
         public void checkPlayerState ()
         {
+            
             if (collisionCheck(Game1.global.player) == true && Game1.global.debugMode == 0)
             {
-                Game1.global.player.state = State.Dead;
+                Game1.global.effectsManager.addExplosion(
+                        Game1.global.player.x,
+                        Game1.global.player.y, size);
+                Game1.global.player.playerMissing = 1;
+                if (Game1.global.player.state == State.Dead)
+                {
+                    return;
+                }
+
+                
+                Game1.global.player.lives--;
+                for(int i = 0; i < Game1.global.ListOfEnemies.Count; i++)
+                {
+                    Game1.global.ListOfEnemies[i].state = State.Dead;
+                }
             }
         }
 
@@ -139,6 +152,10 @@ namespace Game1
             updateHoming2();
             checkEnemyState();
             checkPlayerState();
+            if (Game1.global.player.lives <= 0)
+            {
+                Game1.global.player.state = State.Dead;
+            }
         }
         override public void draw()
         {
