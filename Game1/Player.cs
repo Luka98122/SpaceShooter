@@ -12,7 +12,7 @@ namespace Game1
         public int portalcooldown = 30;
         static public Texture2D texPlayer;
         public int summonCooldown = 20;     
-        public int bombCount = 1;           
+        public int bombCount = 1000;           
         public int bombcooldown = 20;
         public int lives = 3;
         public int missingPlayerTimer = 100;
@@ -37,15 +37,8 @@ namespace Game1
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && summonCooldown <= 0)
             {
-                for (int i = 0; i < 2; i++)
-                {
-                    Enemy MyEnemy = new Enemy();
-                    Game1.global.ListOfEnemies.Add(MyEnemy);
-                    if(i == 10)
-                    {
-                        summonCooldown = 100;
-                    }
-                }
+                SpawnWaveCenter spawnWaveCenter = new SpawnWaveCenter();
+                Game1.global.spawnManager.listOfSpawnWaves.Add(spawnWaveCenter);
             }
             summonCooldown--;
         }
@@ -108,7 +101,7 @@ namespace Game1
                         MyBullet.x = x;
                         MyBullet.y = y;
                         Game1.global.ListOfBullets.Add(MyBullet);
-                        Game1.global.cooldown = 4;
+                        Game1.global.cooldown = 1;
                     }
                 }
                 Game1.global.cooldown--;
@@ -120,7 +113,12 @@ namespace Game1
             {
                 for(int i = 0;i<Game1.global.ListOfBullets.Count;i++)
                 {
-                    Game1.global.ListOfBullets[i].state = State.Dead;
+                    Game1.global.ListOfBullets.RemoveAt(i);
+                }
+
+                for(int i = 0;i<Game1.global.ListOfEnemies.Count;i++)
+                {
+                    Game1.global.ListOfEnemies.RemoveAt(i);
                 }
             }
             
@@ -195,6 +193,7 @@ namespace Game1
                 //updatePortal();
                 updateBorder();
                 StopLag();
+                
             }
             
         }

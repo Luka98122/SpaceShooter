@@ -18,7 +18,7 @@ namespace Game1
         {
             for (int i = 0; i < 5; i++) {
                 Enemy myEnemy = new Enemy ();
-                if(corner == 1)
+                if(corner == 1) // Top left
                 {
                     myEnemy.x = myEnemy.width;
                     myEnemy.y = myEnemy.height;

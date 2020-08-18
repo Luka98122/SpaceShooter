@@ -4,28 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Game1
 {
     public class SpawnManager
     {
-        public List<CompleteCornerWave> listOfCornerWaves = new List<CompleteCornerWave> ();
+        public List<SpawnWaveBaseClass> listOfSpawnWaves = new List<SpawnWaveBaseClass>();
 
         public void addCornerWave() {
-            CompleteCornerWave cornerWave = new CompleteCornerWave();
-            listOfCornerWaves.Add(cornerWave);
+            
         }
         public void initalize ()
         {
-            for(int i = 0;i<listOfCornerWaves.Count;i++)
-            {
-                listOfCornerWaves[i].initalize();
-            }
         }
-        public void update ()
+        public void update()
         {
-            for(int i = 0;i<listOfCornerWaves.Count;i++)
+            for (int i = 0; i < listOfSpawnWaves.Count; i++)
             {
-                listOfCornerWaves[i].update();
+                listOfSpawnWaves[i].update();
+            }
+
+            for (int i = 0; i < listOfSpawnWaves.Count; i++)
+            {
+                
+                if(listOfSpawnWaves[i].shouldDie() == true)
+                {
+                    listOfSpawnWaves.RemoveAt(i);
+                }
             }
         }
     }

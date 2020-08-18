@@ -43,8 +43,11 @@ namespace Game1
                 return;
             }
 
-            x = x + dx*speed;
-            y = y + dy*speed;
+            if (Game1.global.debugBulletsMove == 1)
+            {
+                x = x + dx * speed;
+                y = y + dy * speed;
+            }
 
             if (x<0 || x > Game1.global.windowWidth || y < 0 || y > Game1.global.windowHeight)
             {

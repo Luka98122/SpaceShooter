@@ -23,10 +23,11 @@ namespace Game1
         public int cooldown = 20;
         public int Controlled = 0;
         public EffectsManager effectsManager = new EffectsManager();
-        public int debugMode = 0;
+        public int godMode = 1;
         public ExplosionEffect expy;
         public SpawnManager spawnManager = new SpawnManager() { };
         public HUD Hud;
+        public int debugBulletsMove = 0;
         
         public Game1()
         {
@@ -44,7 +45,7 @@ namespace Game1
             debugCooldown--;
             if (debugCooldown <= 0)
             {
-                effectsManager.addExplosion(100, 100,5000);
+                //effectsManager.addExplosion(100, 100,5000);
                 debugCooldown = 100;
             }
 
@@ -95,9 +96,14 @@ namespace Game1
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Y == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Y == ButtonState.Pressed)
             {
-                spawnManager.addCornerWave();
+                debugBulletsMove = 1;
+            }
+
+            if (GamePad.GetState(PlayerIndex.One).Buttons.B == ButtonState.Pressed)
+            {
+                debugBulletsMove = 0;
             }
             spawnManager.update();
             player.update();
@@ -116,6 +122,7 @@ namespace Game1
             for (int i = 0; i < ListOfEnemies.Count; i++)
             {
                 ListOfEnemies[i].update();
+                //ListOfEnemies[i].checkEnemyState();
             }
             updateDebug();
         }

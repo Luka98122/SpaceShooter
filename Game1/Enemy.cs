@@ -103,7 +103,7 @@ namespace Game1
         public void checkPlayerState ()
         {
             
-            if (collisionCheck(Game1.global.player) == true && Game1.global.debugMode == 0)
+            if (collisionCheck(Game1.global.player) == true && Game1.global.godMode == 0)
             {
                 Game1.global.effectsManager.addExplosion(
                         Game1.global.player.x,
