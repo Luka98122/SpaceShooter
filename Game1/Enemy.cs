@@ -13,11 +13,11 @@ namespace Game1
         float dx;
         float dy;
         int enemyHP = 1;
-        float speed = 4.2f;
         float ddx = 0.03f;
         float ddy = 0.03f;
         float dxCap = 2.0f;
         float dyCap = 2.0f;
+        public float speed = 4.2f;
         public float explosionXoffset;
         public float explosionYoffset;
         public float size;
@@ -103,7 +103,7 @@ namespace Game1
         public void checkPlayerState ()
         {
             
-            if (collisionCheck(Game1.global.player) == true && Game1.global.godMode == 0)
+            if (collisionCheck(Game1.global.player) == true && Game1.global.godMode == 0 && Game1.global.player.playerMissing != 1)
             {
                 Game1.global.effectsManager.addExplosion(
                         Game1.global.player.x,

@@ -23,11 +23,11 @@ namespace Game1
         public int cooldown = 20;
         public int Controlled = 0;
         public EffectsManager effectsManager = new EffectsManager();
-        public int godMode = 1;
+        public int godMode = 0;
         public ExplosionEffect expy;
         public SpawnManager spawnManager = new SpawnManager() { };
         public HUD Hud;
-        public int debugBulletsMove = 0;
+        public int debugBulletsMove = 1;
         
         public Game1()
         {
@@ -52,6 +52,7 @@ namespace Game1
         }
         protected override void Initialize()
         {
+            spawnManager.initalize();
             player = new Player();
             Hud = new HUD();
             background = new Background();

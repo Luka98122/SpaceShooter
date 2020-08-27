@@ -60,6 +60,7 @@
     <Compile Include="SpawnWaveBox.cs" />
     <Compile Include="SpawnWaveCenter.cs" />
     <Compile Include="SpawnWaveCorner.cs" />
+    <Compile Include="SpawnWaveEdges.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

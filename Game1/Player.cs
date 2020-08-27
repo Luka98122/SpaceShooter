@@ -13,7 +13,7 @@ namespace Game1
         static public Texture2D texPlayer;
         public int summonCooldown = 20;     
         public int bombCount = 1000;           
-        public int bombcooldown = 20;
+        public int bombcooldown = 2000;
         public int lives = 3;
         public int missingPlayerTimer = 100;
         public int playerMissing = 0;
@@ -39,6 +39,14 @@ namespace Game1
             {
                 SpawnWaveCenter spawnWaveCenter = new SpawnWaveCenter();
                 Game1.global.spawnManager.listOfSpawnWaves.Add(spawnWaveCenter);
+
+                SpawnWaveCorner spawnWaveCorner = new SpawnWaveCorner();
+                Game1.global.spawnManager.listOfSpawnWaves.Add(spawnWaveCorner);
+
+
+                SpawnWaveEdges spawnWaveEdges = new SpawnWaveEdges();
+                Game1.global.spawnManager.listOfSpawnWaves.Add(spawnWaveEdges);
+                summonCooldown = 120;
             }
             summonCooldown--;
         }

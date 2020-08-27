@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace Game1
 {
-    public class SpawnWaveBox
+    public abstract class SpawnWaveBox : SpawnWaveBaseClass
     {
+        public override void initialize()
+        {
+        }
+
+        public override bool shouldDie()
+        {
+            return false;
+        }
+        public override void update()
+        {
+        }
     }
 }
