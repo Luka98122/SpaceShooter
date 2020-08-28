@@ -23,7 +23,7 @@ namespace Game1
         public int cooldown = 20;
         public int Controlled = 0;
         public EffectsManager effectsManager = new EffectsManager();
-        public int godMode = 0;
+        public int godMode =0;
         public ExplosionEffect expy;
         public SpawnManager spawnManager = new SpawnManager() { };
         public HUD Hud;
@@ -48,7 +48,7 @@ namespace Game1
                 //effectsManager.addExplosion(100, 100,5000);
                 debugCooldown = 100;
             }
-
+            //Debug.WriteLine("Enemies on screen " + Game1.global.ListOfEnemies.Count);
         }
         protected override void Initialize()
         {
@@ -123,7 +123,8 @@ namespace Game1
             for (int i = 0; i < ListOfEnemies.Count; i++)
             {
                 ListOfEnemies[i].update();
-                //ListOfEnemies[i].checkEnemyState();
+                ListOfEnemies[i].checkEnemyState();
+                ListOfEnemies[i].killEnemies();
             }
             updateDebug();
         }

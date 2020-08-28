@@ -35,7 +35,7 @@ namespace Game1
             spriteHeight = sheet.Height / rowCount;
             cooldown = animationDelay;
             this.animationDelay = animationDelay;
-            Debug.WriteLine("Anim delay " + animationDelay);
+            //Debug.WriteLine("Anim delay " + animationDelay);
         }
         
         public void draw (Rectangle rectDest)

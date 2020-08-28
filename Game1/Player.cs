@@ -109,7 +109,7 @@ namespace Game1
                         MyBullet.x = x;
                         MyBullet.y = y;
                         Game1.global.ListOfBullets.Add(MyBullet);
-                        Game1.global.cooldown = 1;
+                        Game1.global.cooldown = 4;
                     }
                 }
                 Game1.global.cooldown--;

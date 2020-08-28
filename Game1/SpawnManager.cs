@@ -13,8 +13,8 @@ namespace Game1
         public int cooldown = 10;
         int numberHit; 
         int positiveSpace;
-
-        int chanceCooldown = 10;
+        int WhichSpawnWave = 1;
+        public int chanceCooldown = 10;
 
 
         public void initalize ()
@@ -44,7 +44,7 @@ namespace Game1
         public void autoSpawn ()
         {
             //Time wave
-            /*cooldown--;
+            cooldown--;
             if(cooldown <= 0)
             {
                 cooldown = 300;
@@ -66,18 +66,41 @@ namespace Game1
                     }
                 }
                 listOfSpawnWaves.Add(spawn);
-            }*/
+            }
             //chance wave
             chanceCooldown--;
             if (chanceCooldown <= 0)
             {
                 numberHit = Game1.global.rand.Next(0, 100);
-                positiveSpace = 50 - Game1.global.ListOfEnemies.Count * 4;
+                positiveSpace = 50 - Game1.global.ListOfEnemies.Count * 10;
                 if(numberHit <= positiveSpace)
                 {
-                    
+                    randomSpawnWave();
                 }
             }
+            
+        }
+        public void randomSpawnWave()
+        {
+            
+            WhichSpawnWave = Game1.global.rand.Next(3);
+            SpawnWaveBaseClass spawn1;
+            if (WhichSpawnWave == 0)
+            {
+                spawn1 = new SpawnWaveCorner();
+            }
+            else
+            {
+                if (WhichSpawnWave == 1)
+                {
+                    spawn1 = new SpawnWaveCenter();
+                }
+                else
+                {
+                    spawn1 = new SpawnWaveEdges();
+                }
+            }
+            Game1.global.spawnManager.listOfSpawnWaves.Add(spawn1);
         }
     }
 }

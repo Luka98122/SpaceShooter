@@ -17,7 +17,7 @@ namespace Game1
         float ddy = 0.03f;
         float dxCap = 2.0f;
         float dyCap = 2.0f;
-        public float speed = 4.2f;
+        public float speed = 2.2f;
         public float explosionXoffset;
         public float explosionYoffset;
         public float size;
@@ -114,12 +114,13 @@ namespace Game1
                     return;
                 }
 
-                
                 Game1.global.player.lives--;
+                Game1.global.spawnManager.listOfSpawnWaves.Clear();
                 for(int i = 0; i < Game1.global.ListOfEnemies.Count; i++)
                 {
                     Game1.global.ListOfEnemies[i].state = State.Dead;
                 }
+                Game1.global.spawnManager.chanceCooldown = 400;
             }
         }
 
@@ -127,7 +128,7 @@ namespace Game1
         {
             for (int i = 0; i < Game1.global.ListOfBullets.Count; i++)
             {
-                if (Game1.global.ListOfBullets[i].state != State.Dead && collisionCheck(Game1.global.ListOfBullets[i]))
+                if (Game1.global.ListOfBullets[i].state != State.Dead && collisionCheck(Game1.global.ListOfBullets[i]) && state != State.Dead)
                 {
                     Game1.global.ListOfBullets[i].state = State.Dead;
                     enemyHP--;
@@ -164,6 +165,17 @@ namespace Game1
             }   
 
             drawSprite(texAlien);
+        }
+        public void killEnemies ()
+        {
+            for(int i = 0;i<Game1.global.ListOfEnemies.Count;i++)
+            {
+                if(Game1.global.ListOfEnemies[i].state == State.Dead)
+                {
+                    Game1.global.ListOfEnemies.RemoveAt(i);
+                    i--;
+                }
+            }
         }
     }
 }
