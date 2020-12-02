@@ -14,6 +14,7 @@ namespace Game1
         public Background background;
         public Random rand = new Random();
         public List<Enemy> ListOfEnemies = new List<Enemy>();
+        public List<EnemyBouncer> ListOfEnemyBouncers = new List<EnemyBouncer>();
         public static Game1 global = null;
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
@@ -23,7 +24,7 @@ namespace Game1
         public int cooldown = 20;
         public int Controlled = 0;
         public EffectsManager effectsManager = new EffectsManager();
-        public int godMode =0;
+        public int godMode = 1;
         public ExplosionEffect expy;
         public SpawnManager spawnManager = new SpawnManager() { };
         public HUD Hud;
@@ -80,6 +81,7 @@ namespace Game1
             Enemy.loadResources();
             Bullet.loadResources();
             Hud.loadRecources();
+            EnemyBouncer.loadResources();
         }
 
         protected override void UnloadContent()
@@ -126,6 +128,10 @@ namespace Game1
                 ListOfEnemies[i].checkEnemyState();
                 ListOfEnemies[i].killEnemies();
             }
+            for (int i = 0; i < ListOfEnemyBouncers.Count; i++)
+            {
+                ListOfEnemyBouncers[i].update();
+            }
             updateDebug();
         }
             
@@ -148,6 +154,10 @@ namespace Game1
             {
                 ListOfEnemies[i].draw();
 
+            }
+            for ( int i = 0;i<ListOfEnemyBouncers.Count;i++)
+            {
+                ListOfEnemyBouncers[i].draw();
             }
             player.draw();
             Hud.draw();

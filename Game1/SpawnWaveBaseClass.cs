@@ -8,7 +8,7 @@ namespace Game1
 {
     public abstract class SpawnWaveBaseClass
     {
-        public abstract void initialize();
+        public abstract void initialize(int EnemyChances);
         public abstract void update();
         public abstract bool shouldDie();
     }

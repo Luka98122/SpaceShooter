@@ -10,7 +10,7 @@ namespace Game1
     public class SpawnManager
     {
         public List<SpawnWaveBaseClass> listOfSpawnWaves = new List<SpawnWaveBaseClass>();
-        public int cooldown = 10;
+        public int cooldown = 200;
         int numberHit; 
         int positiveSpace;
         int WhichSpawnWave = 1;
@@ -24,6 +24,7 @@ namespace Game1
         }
         public void update()
         {
+            if(Game1.global.player.autoSpawnSwitch == 1)
             autoSpawn();
 
             for (int i = 0; i < listOfSpawnWaves.Count; i++)
@@ -49,7 +50,7 @@ namespace Game1
             {
                 cooldown = 300;
                 SpawnWaveBaseClass spawn;
-                int WhichSpawnWave = Game1.global.rand.Next(1, 4);
+                int WhichSpawnWave = Game1.global.rand.Next(1, 5);
                 if (WhichSpawnWave == 1)
                 {
                     spawn = new SpawnWaveCorner();
@@ -64,6 +65,10 @@ namespace Game1
                     {
                         spawn = new SpawnWaveEdges();
                     }
+                }
+                if (WhichSpawnWave == 4)
+                {
+                    spawn = new X_spawn_pattern();
                 }
                 listOfSpawnWaves.Add(spawn);
             }
@@ -83,7 +88,7 @@ namespace Game1
         public void randomSpawnWave()
         {
             
-            WhichSpawnWave = Game1.global.rand.Next(3);
+            WhichSpawnWave = Game1.global.rand.Next(0,5);
             SpawnWaveBaseClass spawn1;
             if (WhichSpawnWave == 0)
             {
@@ -100,6 +105,11 @@ namespace Game1
                     spawn1 = new SpawnWaveEdges();
                 }
             }
+            if(WhichSpawnWave == 4)
+            {
+                spawn1 = new X_spawn_pattern();
+            }
+            
             Game1.global.spawnManager.listOfSpawnWaves.Add(spawn1);
         }
     }

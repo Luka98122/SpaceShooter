@@ -12,9 +12,11 @@ namespace Game1
         public int howmanyEnemies = 20;
         public int enemiesSoFar = 0;
         public int spacing = 5;
+        public int enemyChances = 0;
 
-        public override void initialize()
+        public override void initialize(int EnemyChances)
         {
+            enemyChances = EnemyChances;
         }
 
         public override void update()

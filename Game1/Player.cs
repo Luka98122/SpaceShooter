@@ -14,9 +14,10 @@ namespace Game1
         public int summonCooldown = 20;     
         public int bombCount = 1000;           
         public int bombcooldown = 2000;
-        public int lives = 3;
+        public int lives = 20;
         public int missingPlayerTimer = 100;
         public int playerMissing = 0;
+        public int autoSpawnSwitch = 1;
 
         public override void initialize()
         {
@@ -37,6 +38,7 @@ namespace Game1
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && summonCooldown <= 0)
             {
+                /*xxx
                 SpawnWaveCenter spawnWaveCenter = new SpawnWaveCenter();
                 Game1.global.spawnManager.listOfSpawnWaves.Add(spawnWaveCenter);
 
@@ -46,7 +48,21 @@ namespace Game1
 
                 SpawnWaveEdges spawnWaveEdges = new SpawnWaveEdges();
                 Game1.global.spawnManager.listOfSpawnWaves.Add(spawnWaveEdges);
-                summonCooldown = 120;
+                
+                X_spawn_pattern xSpawnPattern = new X_spawn_pattern();
+                Game1.global.spawnManager.listOfSpawnWaves.Add(xSpawnPattern);
+                
+
+                summonCooldown = 10;
+                EnemyBouncer enemyBouncer = new EnemyBouncer();
+                Game1.global.ListOfEnemyBouncers.Add(enemyBouncer);
+                */
+
+                X_spawn_pattern xSpawnPattern = new X_spawn_pattern();
+                xSpawnPattern.initialize(50);
+                Game1.global.spawnManager.listOfSpawnWaves.Add(xSpawnPattern);
+
+
             }
             summonCooldown--;
         }
@@ -67,7 +83,7 @@ namespace Game1
 
         public void updateMovement ()
         {
-            int speed = 6;
+            int speed = 10;
             float UD = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y;
             float LR = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X;
             
@@ -109,7 +125,7 @@ namespace Game1
                         MyBullet.x = x;
                         MyBullet.y = y;
                         Game1.global.ListOfBullets.Add(MyBullet);
-                        Game1.global.cooldown = 4;
+                        Game1.global.cooldown = 1;
                     }
                 }
                 Game1.global.cooldown--;
@@ -127,6 +143,10 @@ namespace Game1
                 for(int i = 0;i<Game1.global.ListOfEnemies.Count;i++)
                 {
                     Game1.global.ListOfEnemies.RemoveAt(i);
+                }
+                for(int i = 0;i< Game1.global.spawnManager.listOfSpawnWaves.Count;i++)
+                {
+                    Game1.global.spawnManager.listOfSpawnWaves.RemoveAt(i);
                 }
             }
             
@@ -203,7 +223,12 @@ namespace Game1
                 StopLag();
                 
             }
-            
+            if (GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed)
+                autoSpawnSwitch = 1;
+
+            if (GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed)
+                autoSpawnSwitch = 0;
+
         }
         public override void draw()
         {

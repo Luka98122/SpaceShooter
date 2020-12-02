@@ -11,8 +11,9 @@ namespace Game1
         public int cooldown = 0;
         public int howmanyEnemies = 5;
         public int enemiesSoFar = 0;
+        public int enemyChances = 0;
 
-        public override void initialize()
+        public override void initialize(int EnemyChances)
         {
 
         }

@@ -8,7 +8,7 @@ namespace Game1
 {
     public abstract class SpawnWaveBox : SpawnWaveBaseClass
     {
-        public override void initialize()
+        public override void initialize(int EnemyChances)
         {
         }
 

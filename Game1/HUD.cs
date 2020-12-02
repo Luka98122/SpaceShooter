@@ -13,15 +13,16 @@ namespace Game1
         static public Texture2D texHeart;
         public override void draw()
         {
-            int x = 50;
-            int y = 1;
             float width = 50;
             float height = 50;
+            int x = Convert.ToInt32(width);
+            int y = Convert.ToInt32(height);
+            
             for(int i = 0;i<Game1.global.player.lives;i++)
             {
                 Game1.global.spriteBatch.Draw(texHeart,
-                    new Rectangle(x*i,
-                        y,
+                    new Rectangle( x*i,
+                        0,
                         (int)width,
                         (int)height),
                         Color.White);
