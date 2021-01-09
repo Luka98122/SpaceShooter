@@ -23,8 +23,8 @@ namespace Game1
         public override void update()
         {
             int enemyType = 0;
-            int hit = Game1.global.rand.Next(0, 100);
-            if (hit < enemyChances)
+            int generationNumber = Game1.global.rand.Next(0, 100);
+            if (generationNumber < enemyChances)
                 enemyType = 1;
 
             cooldown--;

@@ -22,13 +22,14 @@ namespace Game1
         public int windowHeight = 800;      
         public List<Bullet> ListOfBullets = new List<Bullet>();
         public int cooldown = 20;
-        public int Controlled = 0;
+        public int Controlled = 1;
         public EffectsManager effectsManager = new EffectsManager();
-        public int godMode = 1;
+        public int godMode =1;
         public ExplosionEffect expy;
         public SpawnManager spawnManager = new SpawnManager() { };
         public HUD Hud;
         public int debugBulletsMove = 1;
+        public List<EnemyWanderer> listOfEnemyWanderers = new List<EnemyWanderer>();
         
         public Game1()
         {
@@ -131,6 +132,10 @@ namespace Game1
             for (int i = 0; i < ListOfEnemyBouncers.Count; i++)
             {
                 ListOfEnemyBouncers[i].update();
+            }
+            for (int i = 0; i < listOfEnemyWanderers.Count; i++)
+            {
+                listOfEnemyWanderers[i].update();
             }
             updateDebug();
         }

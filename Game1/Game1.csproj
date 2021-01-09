@@ -47,6 +47,7 @@
     <Compile Include="CompleteCornerWave.cs" />
     <Compile Include="EffectsManager.cs" />
     <Compile Include="Enemy2 .cs" />
+    <Compile Include="Enemy3.cs" />
     <Compile Include="ExplosionEffect.cs" />
     <Compile Include="GameEntity.cs" />
     <Compile Include="HUD.cs" />

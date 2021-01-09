@@ -111,6 +111,7 @@ namespace Game1
             }
             
             Game1.global.spawnManager.listOfSpawnWaves.Add(spawn1);
+            spawn1.initialize(90);
         }
     }
 }

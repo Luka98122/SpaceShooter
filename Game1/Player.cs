@@ -2,6 +2,7 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Security.Cryptography;
 
 namespace Game1
 {
@@ -38,31 +39,28 @@ namespace Game1
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.A == ButtonState.Pressed && summonCooldown <= 0)
             {
-                /*xxx
+                /*
                 SpawnWaveCenter spawnWaveCenter = new SpawnWaveCenter();
+                spawnWaveCenter.initialize(100);
                 Game1.global.spawnManager.listOfSpawnWaves.Add(spawnWaveCenter);
-
-                SpawnWaveCorner spawnWaveCorner = new SpawnWaveCorner();
-                Game1.global.spawnManager.listOfSpawnWaves.Add(spawnWaveCorner);
-
-
-                SpawnWaveEdges spawnWaveEdges = new SpawnWaveEdges();
-                Game1.global.spawnManager.listOfSpawnWaves.Add(spawnWaveEdges);
-                
-                X_spawn_pattern xSpawnPattern = new X_spawn_pattern();
-                Game1.global.spawnManager.listOfSpawnWaves.Add(xSpawnPattern);
-                
-
-                summonCooldown = 10;
-                EnemyBouncer enemyBouncer = new EnemyBouncer();
-                Game1.global.ListOfEnemyBouncers.Add(enemyBouncer);
                 */
+                //SpawnWaveCorner spawnWaveCorner = new SpawnWaveCorner();
+                //spawnWaveCorner.initialize(50);
+                //Game1.global.spawnManager.listOfSpawnWaves.Add(spawnWaveCorner);
 
+
+                //SpawnWaveEdges spawnWaveEdges = new SpawnWaveEdges();
+                //spawnWaveEdges.initialize(80);
+                //Game1.global.spawnManager.listOfSpawnWaves.Add(spawnWaveEdges);
+                /*
                 X_spawn_pattern xSpawnPattern = new X_spawn_pattern();
-                xSpawnPattern.initialize(50);
+                xSpawnPattern.initialize(1);
                 Game1.global.spawnManager.listOfSpawnWaves.Add(xSpawnPattern);
-
-
+                */
+                //summonCooldown = 100;
+                EnemyWanderer enemyWanderer = new EnemyWanderer();
+                enemyWanderer.initialize();
+                Game1.global.listOfEnemyWanderers.Add(enemyWanderer);
             }
             summonCooldown--;
         }
